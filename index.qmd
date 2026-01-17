@@ -1,0 +1,1850 @@
+---
+title: Better maps with <quarto-portada>R</quarto-portada>
+subtitle: <u>With examples</u>
+title-slide-attributes:
+  data-background-color: "#224289"
+author:
+  - name: <vhg>Víctor Gauto, **MS** [{{< iconify fa6-brands:orcid >}}](https://orcid.org/0000-0001-9960-8558)</vhg>
+    affiliation:
+      - name: <rosa><b>GISTAQ</b> (UTN-FRRe)</rosa>
+        url: https://www.instagram.com/gistaq.utn/
+      - name: <rosa><b>IIDTHH</b> (UNNE, CONICET)</rosa>
+        url: https://iidthh.conicet.gov.ar/
+      - name: <rosa><b>Instituto Gulich</b> (UNC, CONAE)<rosa>
+        url: https://ig.conae.unc.edu.ar/
+    email: victor.gauto@ca.free.utn.edu.ar
+    corresponding: true
+  - name: Matías<br>Bonansea, **PhD** [{{< iconify fa6-brands:orcid >}}](https://orcid.org/0000-0003-1953-2595)
+    affiliation:
+      - name: <b>ICBIA</b> (UNRC, CONICET)
+        url: https://icbia.conicet.gov.ar/
+  - name: Anabella<br>Ferral, **PhD** [{{< iconify fa6-brands:orcid >}}](https://orcid.org/0000-0002-9383-7728)
+    affiliation:
+      - name: <b>Instituto Gulich</b> (UNC, CONAE)
+        url: https://ig.conae.unc.edu.ar/
+  - name: Osvaldo<br>Cardozo, **PhD** [{{< iconify fa6-brands:orcid >}}](https://orcid.org/0000-0002-0345-4505)
+    affiliation:
+      - name: <b>IIDTHH</b> (UNNE, CONICET)
+        url: https://iidthh.conicet.gov.ar/
+  - name: Claudia<br>Giardino, **PhD** [{{< iconify fa6-brands:orcid >}}](https://orcid.org/0000-0002-3937-4988)
+    affiliation:
+      - name: <b>IREA</b> (CNR)
+        url: http://www.irea.cnr.it/
+format:
+  revealjs:
+    fig-width: 7
+    fig-height: 7
+    fig-dpi: 300
+    code-link: true
+    code-line-numbers: false
+    code-copy: true
+    code-fold: true
+    code-overflow: wrap
+    code-summary: Show code
+    embed-resources: true
+    number-sections: true
+    auto-play-media: true
+    highlight-style: kate
+    width: 1200
+    incremental: false
+    transition: none
+    logo: https://ig.conae.unc.edu.ar/wp-content/uploads/sites/68/2022/04/G-CLARO-C.png
+    footer: |
+      <b class="fondo-azul"><blanco>Víctor Gauto <rosa>{{< iconify svg-spinners:pulse >}}</rosa> Better maps with <rosa>R</rosa></blanco></b>
+    slide-number: true
+    progress: true
+    hash-type: title
+    date: 2026-01-01
+    center-title-slide: false
+    navigation-mode: linear
+    link-external-icon: false
+    link-external-newwindow: true
+    output-location: column
+    theme:
+      # - flatly
+      - extras/mi_estilo.scss
+    include-in-header:
+      - extras/favicon.html
+    #   - extras/hide-logo.html
+    # include-after-body:
+    #   - extras/hide-menu.html
+    # pointer:
+    #   pointerSize: 15
+    #   color: "#E81F76"
+    #   alwaysVisible: false
+    #   key: "q"
+execute:
+  echo: true
+  eval: false
+  warning: false
+editor_options:
+  chunk_output_type: console
+# preload-iframes: true
+# revealjs-plugins:
+# - pointer
+---
+
+# Outline
+
+- Introduction 
+- Motivation
+- Tools
+- Conclusion
+- Future improvements
+- Resources
+
+<center>Slides available online</center>
+
+::: {.r-fit-text}
+
+```{.r}
+https://vhgauto.github.io/seminario3-gulich/
+```
+
+![](img/qr_seminario.svg){.absolute top=20 right=20 width="400" height="400"}
+
+:::
+
+# Introduction {#sec-introduction}
+
+A good map is an [appealing]{.fragment .hl-blanco fragment-index=1} and [useful]{.fragment .hl-blanco fragment-index=1} plot, that combines <u>design</u>, <u>geography</u> and <u>GIS</u>.
+
+![](img/Minard.png){width="80%" fig-align="center"}
+
+
+# Motivation
+
+# Static maps {#sec-static}
+
+```{r}
+#| echo: false
+#| eval: true
+source("scripts/.soporte.R")
+```
+
+## [terra](https://rspatial.github.io/terra/) {.smaller}
+
+<!-- https://github.com/rspatial/terra/issues/1774 -->
+
+```{r}
+#| eval: true
+#| output: asis
+#| echo: false
+f_logo("terra")
+```
+
+<!-- f_png("terra-1") -->
+
+```{r}
+library(terra)
+plot(r)
+```
+
+::: {layout-ncol="2"}
+![](fig/terra-1.png){height=650px}
+
+Basic map made with `{terra}`, for a quick visualization.
+:::
+
+## [terra](https://rspatial.github.io/terra/) {.smaller}
+
+```{r}
+#| eval: true
+#| output: asis
+#| echo: false
+f_logo("terra")
+```
+
+<!-- https://github.com/rspatial/terra/issues/1774 -->
+
+<!-- f_png("terra-2", alto = 6) -->
+
+```{r}
+plot(
+  r,
+  main = "Topología de Las Heras",
+  col = terrain.colors(50),
+  plg = list(x = "bottom")
+)
+```
+
+::: {layout-ncol="2"}
+![](fig/terra-2.png){height=650px}
+
+Change legend location and color palette and add map title.
+:::
+
+## [terra](https://rspatial.github.io/terra/) {.smaller}
+
+```{r}
+#| eval: true
+#| output: asis
+#| echo: false
+f_logo("terra")
+```
+
+<!-- f_png("terra-3", alto = 6.6) -->
+
+```{r}
+plot(
+  r,
+  background = "grey98",
+  col = terrain.colors(500),
+  range = c(0, 7000),
+  buffer = TRUE,
+  smooth = FALSE,
+  zebra = TRUE,
+  zebra.cex = 1,
+  axes = TRUE,
+  mar = c(5, 1, 3, 1),
+  main = "Topología de Las Heras",
+  col.main = c1,
+  cex.main = 2,
+  line.main = 1.8,
+  line.sub = -25.7,
+  col.sub = c2,
+  cex.sub = 1,
+  sub = "Provincia de Mendoza, Argentina",
+  pax = list(lwd.ticks = 0, cex.axis = 1.2),
+  plg = list(
+    x = "bottom",
+    cex = 1,
+    title = "Elevación (m)",
+    at = seq(0, 6000, by = 1000),
+    horiz = TRUE,
+    bty = "n",
+    tick = "out",
+    tick.length = 1,
+    tick.lwd = 1
+  )
+)
+# brújula
+north(
+  xy = "topright",
+  type = 2,
+  label = "",
+  cex = 1
+)
+# grilla
+graticule(
+  seq(-72, -66.5, .5),
+  seq(-34, -31, .2),
+  crs = crs(r)
+) |>
+  plot(
+    add = TRUE,
+    labels = FALSE,
+    lwd = .7,
+    lty = 2,
+    col = "grey"
+  )
+# anotación, texto
+text(
+  ac,
+  labels = "Aconcagua (6960 m)",
+  halo = TRUE,
+  adj = c(.25, -1)
+)
+text(
+  lh,
+  labels = "Las Heras",
+  halo = TRUE,
+  adj = c(1.1, -.5)
+)
+# anotación, punto
+points(ac, pch = 2, cex = 1)
+points(lh, pch = 1, cex = 1)
+# inset
+inset(
+  mdz_lh,
+  col = c(c1, c2),
+  border = "black",
+  lwd = 1,
+  loc = "topleft",
+  scale = .15,
+  background = "grey90"
+)
+```
+
+::: {layout-ncol="2"}
+![](fig/terra-3.png)
+
+Inset map with Mendoza Province, points of interests with labels, grid lines, axes coordinates, north compass and styled title and subtitle.
+:::
+
+## [mapsf](https://riatelab.github.io/mapsf/) {.smaller}
+
+```{r}
+#| eval: true
+#| output: asis
+#| echo: false
+f_logo("mapsf")
+```
+
+```{r}
+library(mapsf)
+mf_raster(r)
+```
+
+::: {layout-ncol="2"}
+![](fig/mapsf-1.png)
+
+Basic map made with `{mapsf}`.
+:::
+
+## [mapsf](https://riatelab.github.io/mapsf/) {.smaller}
+
+```{r}
+#| eval: true
+#| output: asis
+#| echo: false
+f_logo("mapsf")
+```
+
+```{r}
+mf_raster(
+  r,
+  type = "continuous",
+  leg_pos = "top",
+  leg_horiz = TRUE,
+  leg_title = "Altura (m)",
+  leg_size = .8,
+  expandBB = rep(.1, 4)
+)
+mf_title(txt = "Elevación Las Heras")
+mf_arrow()
+mf_graticule(r, pos = c("bottom", "left"))
+```
+
+::: {layout-ncol="2"}
+![](fig/mapsf-2.png)
+
+North arrow is included along with grid, coordinates, legend at top and title.
+:::
+
+## [mapsf](https://riatelab.github.io/mapsf/) {.smaller}
+
+```{r}
+#| eval: true
+#| output: asis
+#| echo: false
+f_logo("mapsf")
+```
+
+```{r}
+par(family = "Lato")
+theme <- list(
+  mar = c(1, 3, 3, 2),
+  title_tab = FALSE,
+  title_pos = "left",
+  title_inner = FALSE,
+  frame = "figure",
+  frame_lwd = 2,
+  frame_lty = 1,
+  foreground = "white",
+  background = "grey98",
+  highlight = "black"
+)
+mf_theme(theme)
+mf_raster(
+  r,
+  type = "continuous",
+  expandBB = c(.02, .04, .02, .02),
+  breaks = seq(0, 7000, by = 1000),
+  pal = hcl.colors(8, "Terrain"),
+  leg_pos = "bottomleft",
+  leg_title_cex = 1,
+  leg_val_cex = .7,
+  leg_horiz = TRUE,
+  leg_box_cex = 1,
+  leg_adj = c(10, 8),
+  leg_val_rnd = 0,
+  leg_title = "Altura (m)",
+  leg_size = .6,
+  leg_frame = TRUE,
+  leg_bg = "grey98"
+)
+# puntos de interés
+mf_map(
+  p_sf,
+  add = TRUE,
+  pch = 17
+)
+# etiquetas en puntos de interés
+mf_label(
+  p_sf,
+  var = "label",
+  halo = TRUE,
+  lines = TRUE,
+  overlap = FALSE,
+  col = "black",
+  cex = 1,
+  adj = c(.3, -1)
+)
+# título
+mf_title(
+  "Elevación Las Heras",
+  tab = TRUE,
+  cex = 2,
+  line = 2,
+  fg = "black"
+)
+# contorno
+mf_frame(extent = "figure", col = "darkblue", lwd = 2)
+# flecha Norte
+mf_arrow(cex = 1.5, pos = "topright")
+# créditos
+mf_credits(
+  txt = "Víctor Gauto | @vhgauto",
+  pos = "bottomright",
+  cex = .6,
+  font = 2
+)
+# grilla
+mf_graticule(
+  r,
+  lwd = .05,
+  lty = 2,
+  col = "grey30",
+  cex = .5,
+  pos = c("left", "bottom")
+)
+# inset
+mf_inset_on(
+  sf::st_as_sf(mdz_lh),
+  pos = "topleft",
+  fig = c(.1, .3, .8, .95)
+)
+mf_map(
+  sf::st_as_sf(mdz_lh),
+  col = c(c1, c2)
+)
+mf_inset_off()
+```
+
+::: {layout-ncol="2"}
+![](fig/mapsf-3.png)
+
+Final map including Mendoza Province inset in top-left corner, compass, sites of interest and its labels, legend in the bottom-left, grid with coordinates, credits and title.
+:::
+
+## [mapsf](https://riatelab.github.io/mapsf/) {.smaller}
+
+```{r}
+#| eval: true
+#| output: asis
+#| echo: false
+f_logo("mapsf")
+```
+
+[![](img/mapsf.jpeg){width="70%"}](https://raw.githubusercontent.com/riatelab/mapsf/master/vignettes/fig/mapsf_cheatsheet.pdf)
+
+## [mapsf](https://riatelab.github.io/mapsf/) {.smaller}
+
+```{r}
+#| eval: true
+#| output: asis
+#| echo: false
+f_logo("mapsf")
+```
+
+Size and color mapped to variables, in continuous and discrete legends, with globe context location as inset.
+
+::: {layout-nrow=1}
+![](https://riatelab.github.io/mapsf/articles/mapsf_files/figure-html/mf_map_pc-1.png)
+
+![](https://riatelab.github.io/mapsf/articles/fig/wo_font_a-1.png)
+
+![](https://riatelab.github.io/mapsf/articles/mapsf_files/figure-html/mf_map_t-1.png)
+
+![](https://riatelab.github.io/mapsf/articles/fig/wo_inset_worldmap-1.png)
+:::
+
+## [tmap](https://r-tmap.github.io/tmap/index.html) {.smaller}
+
+```{r}
+#| eval: true
+#| output: asis
+#| echo: false
+f_logo("tmap")
+```
+
+```{r}
+library(tmap)
+tm_shape(r) +
+  tm_raster("layer")
+```
+
+::: {layout-ncol="2"}
+![](fig/tmap-1.png)
+
+Basic map with binned legend.
+:::
+
+## [tmap](https://r-tmap.github.io/tmap/index.html) {.smaller}
+
+```{r}
+#| eval: true
+#| output: asis
+#| echo: false
+f_logo("tmap")
+```
+
+```{r}
+tm_shape(r) +
+  tm_raster(
+    col.scale = tm_scale_continuous(),
+    col.legend = tm_legend()
+  ) +
+  tm_graticules() +
+  tm_compass() +
+  tm_layout()
+```
+
+::: {layout-ncol="2"}
+![](fig/tmap-2.png)
+
+Change in the legend location, added grid and compass in the bottom-right corner.
+:::
+
+## [tmap](https://r-tmap.github.io/tmap/index.html) {.smaller}
+
+```{r}
+#| eval: true
+#| output: asis
+#| echo: false
+f_logo("tmap")
+```
+
+```{r}
+inset_tm <- tm_shape(sf::st_as_sf(mdz_lh)) +
+  tm_polygons(
+    fill = "departamentos",
+    fill.legend = tm_legend_hide(),
+    fill.scale = tm_scale_categorical(
+      values = c1,
+      value.na = c2
+    )
+  ) +
+  tm_layout(
+    frame = FALSE,
+    bg = TRUE,
+    bg.color = "grey95"
+  )
+tm_shape(r) +
+  tm_raster(
+    col.scale = tm_scale_continuous(
+      values = "hcl.terrain",
+      limits = c(0, 7000),
+      label.format = tm_label_format(
+        fun = \(X) {
+          format(
+            X,
+            big.mark = ".",
+            decimal.mark = ","
+          )
+        }
+      ),
+    ),
+    col.legend = tm_legend(
+      title = "Altura (m)",
+      reverse = TRUE,
+      frame = FALSE
+    )
+  ) +
+  tm_shape(p_sf) +
+  tm_symbols(
+    shape = 17,
+    size = .7,
+    fill = "black"
+  ) +
+  tm_text(
+    "label",
+    size = .7,
+    options = opt_tm_text(
+      just = c(.5, -1)
+    )
+  ) +
+  tm_grid(
+    lwd = .3,
+    col = "darkgrey",
+    lty = 2,
+    labels.rot = c(0, 90),
+    labels.margin.x = 0,
+    labels.margin.y = -.7
+  ) +
+  tm_compass(
+    type = "arrow",
+    position = c("right", "top"),
+    margins = -.7
+  ) +
+  tm_title(
+    text = "Elevación de Las Heras "
+  ) +
+  tm_credits(
+    text = "Víctor Gauto | @vhgauto",
+    fontface = "bold",
+    position = c("right", "bottom"),
+    bg.color = "white",
+    bg = TRUE,
+    padding = -.7
+  ) +
+  tm_scalebar(
+    breaks = seq(0, 50, 10),
+    position = c("left", "bottom"),
+    bg.color = "white",
+    bg = TRUE,
+    margins = -.7
+  ) +
+  tm_inset(
+    inset_tm,
+    position = c("left", "top"),
+    height = 6,
+    width = 6,
+    margins = -.7
+  )
+```
+
+::: {layout-ncol="2"}
+![](fig/tmap-3.png)
+
+Inset map, scale, points of interest, credits, title, grid and axes coordinates.
+:::
+
+## [tmap](https://r-tmap.github.io/tmap/index.html) {.smaller}
+
+```{r}
+#| eval: true
+#| output: asis
+#| echo: false
+f_logo("tmap")
+```
+
+Point size, color and fill mapped to variables, categorical faceted maps.
+
+::: {.column-screen-inset-shaded layout-nrow=1}
+![](https://r-tmap.github.io/tmap/articles/examples_choro_NLD_files/figure-html/unnamed-chunk-7-1.png)
+
+![](https://r-tmap.github.io/tmap/articles/examples_bubble_files/figure-html/unnamed-chunk-6-1.png)
+
+![](https://r-tmap.github.io/tmap/articles/examples_gridmaps_files/figure-html/unnamed-chunk-5-1.png)
+:::
+
+## [tidyterra](https://dieghernan.github.io/tidyterra/) {.smaller}
+
+```{r}
+#| eval: true
+#| output: asis
+#| echo: false
+f_logo("tidyterra")
+```
+
+```{r}
+library(tidyterra)
+library(ggplot2)
+
+ggplot() +
+  geom_spatraster(data = r)
+```
+
+::: {layout-ncol="2"}
+![](fig/tidyterra-1.png)
+
+Basic plot with blue color palette legend.
+:::
+
+## [tidyterra](https://dieghernan.github.io/tidyterra/) {.smaller}
+
+```{r}
+#| eval: true
+#| output: asis
+#| echo: false
+f_logo("tidyterra")
+```
+
+```{r}
+ggplot() +
+  geom_spatraster(data = r, aes(fill = layer)) +
+  scale_fill_terrain_c(
+    na.value = NA,
+    direction = -1
+  )
+```
+
+::: {layout-ncol="2"}
+![](fig/tidyterra-2.png)
+
+Terrain color palette and removed panel background.
+:::
+
+## [tidyterra](https://dieghernan.github.io/tidyterra/) {.smaller}
+
+```{r}
+#| eval: true
+#| output: asis
+#| echo: false
+f_logo("tidyterra")
+```
+
+```{r}
+ggplot() +
+  geom_spatraster(data = r, aes(fill = layer)) +
+  geom_spatvector(
+    data = lh_v,
+    linewidth = .5,
+    fill = NA,
+    color = "black"
+  ) +
+  geom_spatvector_text(
+    data = p,
+    aes(label = label),
+    hjust = c(0, 1),
+    vjust = -1.5,
+    fontface = "bold",
+    size = 3
+  ) +
+  geom_spatvector(
+    data = p,
+    shape = c(24, 21),
+    size = 4,
+    fill = "white",
+    color = "black",
+    stroke = 1
+  ) +
+  coord_sf(clip = "off") +
+  scale_y_continuous(
+    breaks = scales::breaks_width(.5)
+  ) +
+  scale_fill_terrain_c(
+    na.value = NA,
+    breaks = seq(0, 7000, 1000),
+    limits = c(0, 7000),
+    labels = scales::label_number(
+      big.mark = ".",
+      decimal.mark = ","
+    )
+  ) +
+  labs(
+    title = "Elevación de Las Heras",
+    subtitle = "Provincia de Mendoza",
+    caption = "Víctor Gauto | @vhgauto",
+    fill = "Altura (m)"
+  ) +
+  theme_classic(base_size = 15) +
+  theme_sub_axis(
+    line = element_blank(),
+    ticks = element_blank(),
+    text = element_text(
+      color = "grey40",
+      size = rel(.6)
+    ),
+    title = element_blank()
+  ) +
+  theme_sub_axis_left(
+    text = element_text(
+      angle = 90,
+      hjust = .5
+    )
+  ) +
+  theme_sub_panel(
+    grid = element_line(
+      linetype = 2,
+      linewidth = .1
+    )
+  ) +
+  theme_sub_legend(
+    position = "bottom",
+    key.width = unit(50, "pt"),
+    background = element_blank(),
+    ticks = element_line(
+      color = "black",
+      linewidth = .2
+    ),
+    title = element_text(
+      margin = margin(b = 10, r = 10)
+    ),
+    text = element_text(
+      size = rel(.6),
+      margin = margin_auto(2)
+    )
+  ) +
+  theme_sub_plot(
+    title = element_text(
+      size = rel(2),
+      face = "bold"
+    ),
+    subtitle = element_text(
+      size = rel(1.2)
+    ),
+    caption = element_text(
+      margin = margin(t = 10),
+      face = "bold"
+    ),
+    background = element_rect(
+      fill = "grey97"
+    ),
+    margin = margin_auto(2)
+  ) +
+  theme_sub_panel(
+    background = element_blank()
+  )
+```
+
+::: {layout-ncol="2"}
+![](fig/tidyterra-3.png)
+
+Included title and subtitle, grid with coordinates, points of interest and map caption.
+:::
+
+## [tidyterra](https://dieghernan.github.io/tidyterra/) {.smaller}
+
+```{r}
+#| eval: true
+#| output: asis
+#| echo: false
+f_logo("tidyterra")
+```
+
+Contour lines, categorical legend with base map tiles.
+
+::: {layout-nrow=1 layout-valign="center"}
+![](https://dieghernan.github.io/tidyterra/articles/contourlines-1.png)
+
+![](https://dieghernan.github.io/tidyterra/articles/faqs_files/figure-html/overlay_alt-2.png)
+
+![](https://dieghernan.github.io/tidyterra/reference/geom_spatraster_rgb-2.png)
+:::
+
+## Combined version {.smaller}
+
+```{r}
+library(ggspatial)
+library(patchwork)
+library(ggtext)
+library(showtext)
+
+font_add_google(
+  name = "Lobster",
+  family = "lobster"
+)
+font_add_google(
+  name = "Tinos",
+  family = "tinos"
+)
+showtext_auto()
+showtext_opts(dpi = 300)
+
+gg_inset <- ggplot() +
+  geom_spatvector(
+    data = mdz_lh,
+    aes(fill = provincia),
+    show.legend = FALSE
+  ) +
+  scale_fill_manual(
+    values = c1,
+    na.value = c2
+  ) +
+  theme_void() +
+  theme_sub_plot(
+    background = element_rect(fill = "grey90")
+  )
+
+ggplot() +
+  geom_spatraster(data = r, aes(fill = layer)) +
+  geom_spatvector(
+    data = lh_v,
+    fill = NA,
+    color = "black",
+    linewidth = .5
+  ) +
+  geom_spatvector_label(
+    data = p,
+    aes(label = label),
+    hjust = c(-.04, 1),
+    vjust = 0,
+    nudge_y = .01,
+    fontface = "bold",
+    fill = alpha("white", .4),
+    border.color = NA,
+    label.padding = unit(0.1, "lines"),
+    label.r = unit(0, "lines"),
+    size = 4
+  ) +
+  geom_spatvector(
+    data = p,
+    shape = c(24, 21),
+    size = 4,
+    fill = "white",
+    color = "black",
+    stroke = 1
+  ) +
+  annotation_north_arrow(
+    style = north_arrow_fancy_orienteering(
+      text_size = 10
+    ),
+    location = "tr",
+    height = unit(1, "cm"),
+    width = unit(1, "cm")
+  ) +
+  annotation_scale(
+    location = "bl",
+    text_cex = 1,
+    text_family = "mono"
+  ) +
+  scale_y_continuous(
+    breaks = scales::breaks_width(.5)
+  ) +
+  scale_fill_hypso_c(
+    palette = "gmt_globe_hypso",
+    na.value = NA,
+    breaks = seq(0, 7000, 1000),
+    limits = c(0, 7000),
+    labels = scales::label_number(
+      big.mark = "",
+      decimal.mark = ","
+    )
+  ) +
+  labs(
+    title = glue(
+      "Elevación de <b style='color: {c1};",
+      "font-family: lobster;'>Las Heras</b>"
+    ),
+    subtitle = glue(
+      "Provincia de <b style='color: {c2};'>",
+      "Mendoza</b>"
+    ),
+    caption = glue(
+      "<span style='color: {c1};'>Víctor Gauto",
+      "</span> | <span style='color: {c2};'>",
+      "@vhgauto</span>"
+    ),
+    fill = "Altura (m)"
+  ) +
+  theme_classic(
+    base_size = 10,
+    base_family = "tinos"
+  ) +
+  theme_sub_axis(
+    line = element_blank(),
+    ticks = element_blank(),
+    text = element_text(
+      color = "grey40",
+      size = rel(1),
+      family = "mono"
+    ),
+    title = element_blank()
+  ) +
+  theme_sub_axis_left(
+    text = element_text(
+      angle = 90,
+      hjust = .5
+    )
+  ) +
+  theme_sub_panel(
+    grid = element_line(
+      linetype = 2,
+      linewidth = .1
+    )
+  ) +
+  theme_sub_legend(
+    position = "bottom",
+    key.width = unit(60, "pt"),
+    background = element_blank(),
+    frame = element_rect(
+      color = "black",
+      linewidth = .1
+    ),
+    ticks = element_line(
+      color = "black",
+      linewidth = .2
+    ),
+    title = element_text(
+      margin = margin(b = 14, r = 10),
+      size = rel(1.3)
+    ),
+    text = element_text(
+      family = "mono",
+      size = rel(1),
+      margin = margin_auto(4)
+    )
+  ) +
+  theme_sub_plot(
+    title = element_markdown(
+      size = rel(3),
+      face = "bold"
+    ),
+    subtitle = element_markdown(
+      size = rel(2),
+      margin = margin(b = 15)
+    ),
+    caption = element_markdown(
+      margin = margin(t = 10),
+      size = rel(1.6),
+      face = "bold"
+    ),
+    background = element_rect(
+      fill = "grey97"
+    ),
+    margin = margin_auto(5)
+  ) +
+  theme_sub_panel(
+    background = element_blank()
+  ) +
+  inset_element(
+    gg_inset,
+    left = 0,
+    bottom = .7,
+    right = .2,
+    top = 1
+  ) +
+  plot_annotation(
+    theme = theme(
+      plot.margin = margin_auto(0)
+    )
+  )
+```
+
+::: {layout-ncol="2"}
+![](fig/combined.png)
+
+Styled title, subtitle and caption, scale and compass, grid and coordinates, points of interest.
+:::
+
+# Animated maps
+
+## [terra](https://rspatial.github.io/terra/) {.smaller}
+
+```{r}
+#| eval: true
+#| output: asis
+#| echo: false
+f_logo("terra")
+```
+
+```{r}
+par(mfrow = c(4, 3))
+terra::animate(t_lh)
+```
+
+::: {layout-ncol="2"}
+![](fig/anim-terra-1.png)
+
+`{terra}` prints a plot per each layer in a raster file, in sequence.
+:::
+
+## [terra](https://rspatial.github.io/terra/) {.smaller}
+
+```{r}
+#| eval: true
+#| output: asis
+#| echo: false
+f_logo("terra")
+```
+
+```{r}
+f_png <- function(i) {
+  ii <- if (i < 10) paste0("0", i) else i
+  png(
+    filename = paste0("anim/", ii, ".png"),
+    width = 7,
+    height = 7,
+    units = "in",
+    res = 300
+  )
+  plot(
+    t_lh[[i]],
+    background = "grey70",
+    col = hcl.colors(500, "Blue-Red 3"),
+    range = c(-21, 27),
+    buffer = TRUE,
+    smooth = FALSE,
+    zebra = TRUE,
+    zebra.cex = 1,
+    axes = TRUE,
+    mar = c(5, 2, 2, 1),
+    main = "Temperatura media Las Heras",
+    col.main = c1,
+    cex.main = 2,
+    line.main = 2,
+    line.sub = -24.8,
+    col.sub = c2,
+    cex.sub = 1,
+    sub = paste0("Período: ", names(t_lh[[i]])),
+    pax = list(lwd.ticks = 0, cex.axis = 1.2),
+    plg = list(
+      x = "bottom",
+      nudge = c(0, .06),
+      cex = 1,
+      size = c(1, 2),
+      title = "Temperatura (°C)",
+      at = seq(-20, 25, by = 5),
+      horiz = TRUE,
+      bty = "n",
+      tick = "out",
+      tick.length = 1,
+      tick.lwd = 1
+    )
+  )
+  polys(lh_v, lwd = 1)
+  # brújula
+  north(
+    xy = "topright",
+    type = 2,
+    label = "",
+    cex = 1
+  )
+  # grilla
+  graticule(
+    seq(-72, -66.5, .5),
+    seq(-34, -31, .2),
+    crs = crs(r)
+  ) |>
+    plot(
+      add = TRUE,
+      labels = FALSE,
+      lwd = .5,
+      lty = 1,
+      col = "grey80"
+    )
+  dev.off()
+}
+
+purrr::walk(1:12, f_png)
+
+gifski::gifski(
+  list.files("anim/", full.names = TRUE),
+  gif_file = "gifs/terra.gif",
+  width = 1000,
+  height = 1000,
+  delay = 1 / 2,
+  loop = TRUE,
+  progress = FALSE
+)
+```
+
+::: {layout-ncol="2"}
+![](https://raw.githubusercontent.com/vhgauto/seminario3-gulich/refs/heads/main/gifs/terra.gif)
+
+Animated map made from single figures per layer, compiled in a `.gif` file. This technique can be applied to all mentioned methods for map plotting.
+:::
+
+## [tmap](https://r-tmap.github.io/tmap/index.html) {.smaller}
+
+```{r}
+#| eval: true
+#| output: asis
+#| echo: false
+f_logo("tmap")
+```
+
+```{r}
+library(tmap)
+tmap_anim <- tm_shape(t_lh) +
+  tm_raster(
+    col.scale = tm_scale_continuous(
+      values = "hcl.blue_red",
+      limits = c(-21, 27),
+      midpoint = 0
+    ),
+    col.legend = tm_legend(
+      title = "°C",
+      title.size = 2,
+      frame = FALSE,
+      text.size = 1.3
+    )
+  ) +
+  tm_compass(
+    position = c("left", "top"),
+    margins = c(0, -.4, -.4, 0)
+  ) +
+  tm_layout(
+    bg.color = "grey70",
+    panel.label.bg = FALSE,
+    panel.label.frame = FALSE,
+    panel.label.size = 2,
+    panel.label.height = 2,
+    inner.margins = c(.02, .02, .02, .02)
+  ) +
+  tm_scalebar(
+    breaks = seq(0, 50, 10),
+    position = c("left", "bottom"),
+    bg.color = "transparent",
+    bg = TRUE,
+    text.size = 1
+  ) +
+  tm_title(
+    text = "Temperatura media Las Heras",
+    size = 3
+  ) +
+  tm_credits(
+    text = "Víctor Gauto | @vhgauto",
+    position = c("right", "bottom"),
+    size = 1,
+    fontface = "bold",
+    padding = -.2
+  ) +
+  tm_animate(fps = 2, play = "loop") +
+  tm_shape(lh_v) +
+  tm_borders(lwd = 2)
+
+tmap_animation(
+  tmap_anim,
+  "gifs/tmap.gif",
+  width = 1000,
+  height = 750
+)
+```
+
+::: {layout-ncol="2"}
+![](https://raw.githubusercontent.com/vhgauto/seminario3-gulich/refs/heads/main/gifs/tmap.gif)
+
+`{tmap}` offers a specific funtion to create animated maps from the raster layers.
+:::
+
+## [gganimate](https://gganimate.com/) {.smaller}
+
+```{r}
+#| eval: true
+#| output: asis
+#| echo: false
+f_logo("gganimate")
+```
+
+```{r}
+library(ggspatial)
+library(tidyterra)
+library(gganimate)
+
+anim <- ggplot() +
+  geom_spatraster(
+    data = t_lh
+  ) +
+  geom_spatvector(
+    data = lh_v,
+    fill = NA,
+    color = "black",
+    linewidth = .2
+  ) +
+  annotation_north_arrow(
+    location = "tl",
+    width = unit(.25, "cm"),
+    height = unit(.25, "cm"),
+    style = north_arrow_orienteering(text_size = 2)
+  ) +
+  annotation_scale(
+    location = "bl",
+    width_hint = .2,
+    height = unit(0.2, "cm"),
+    text_cex = .4,
+    line_width = .3
+  ) +
+  scale_y_continuous(
+    breaks = scales::breaks_width(.5)
+  ) +
+  scale_fill_gradient2(
+    low = "#1a318b",
+    mid = "white",
+    high = "#9a153d",
+    midpoint = 0,
+    limits = c(-21, 27),
+    breaks = seq(-20, 25, 5),
+    na.value = NA
+  ) +
+  transition_manual(lyr) +
+  labs(
+    title = "Temperatura media Las Heras",
+    subtitle = "Período: {current_frame}",
+    fill = "°C",
+    caption = "Víctor Gauto | @vhgauto"
+  ) +
+  theme_classic(base_size = 8) +
+  theme_sub_axis(
+    line = element_blank(),
+    text = element_text(size = rel(.5)),
+    ticks = element_blank()
+  ) +
+  theme_sub_axis_left(
+    text = element_text(angle = 90, hjust = .5)
+  ) +
+  theme_sub_legend(
+    key.height = unit(20, "pt"),
+    key.width = unit(7, "pt"),
+    text = element_text(
+      size = rel(.6),
+      margin = margin_auto(1)
+    ),
+    frame = element_rect(
+      color = "black",
+      linewidth = .1
+    )
+  ) +
+  theme_sub_panel(
+    background = element_rect(
+      fill = "grey70",
+      color = NA
+    ),
+    grid.major = element_line(
+      linewidth = .02,
+      linetype = 2,
+      color = "grey50"
+    )
+  ) +
+  theme_sub_plot(
+    margin = margin_auto(2),
+    caption = element_text(
+      face = "bold",
+      size = rel(.7)
+    )
+  )
+
+anim_save(
+  filename = "gifs/gganimate.gif",
+  animation = anim,
+  width = 1000,
+  height = 800,
+  res = 300,
+  duration = 6
+)
+```
+
+::: {layout-ncol="2"}
+![](https://raw.githubusercontent.com/vhgauto/seminario3-gulich/refs/heads/main/gifs/gganimate.gif)
+
+Animated map created by combining `{tidyterra}` with `{gganimate}`, including functions to indicate the layer change in the subtitle.
+:::
+
+# Interactive maps
+
+## [ggiraph](https://davidgohel.github.io/ggiraph/) {.smaller}
+
+```{r}
+#| eval: true
+#| output: asis
+#| echo: false
+f_logo("ggiraph")
+```
+
+```{r}
+library(ggiraph)
+library(ggplot2)
+library(showtext)
+library(htmltools)
+
+font_add_google(name = "Tinos", family = "tinos")
+showtext_auto()
+showtext_opts(dpi = 300)
+
+p <- ggplot() +
+  geom_sf_interactive(
+    data = arg3,
+    aes(
+      tooltip = Provincia,
+      data_id = Provincia,
+      onclick = sprintf(
+        "window.open(\"http://es.wikipedia.org/wiki/%s\")",
+        paste0("Provincia_de_", gsub(" ", "_", Provincia))
+      ),
+    ),
+    fill = "#75aee0",
+    linewidth = 12,
+    color = "#e5e5e5"
+  ) +
+  labs(title = "Provincias de Argentina") +
+  coord_sf(clip = "off") +
+  theme_void(
+    base_size = 800,
+    base_family = "tinos"
+  ) +
+  theme_sub_plot(
+    title = element_text(
+      hjust = 0,
+      vjust = -3,
+      margin = margin_auto(100)
+    )
+  )
+
+girafe(
+  ggobj = p,
+  bg = "#e5e5e5",
+  height_svg = 500,
+  width_svg = 500,
+  options = list(
+    opts_tooltip(
+      css = glue(
+        "background-color:white;color:black;padding:5px;",
+        "font-weight:bold;font-size:15pt;border-radius:0px;",
+        "border-style:solid;border-color:black;border-width:1px;",
+        "font-family:Lato;"
+      ),
+      opacity = 1
+    ),
+    opts_hover(
+      css = girafe_css(
+        css = "",
+        area = glue("fill:#f6b40e;")
+      )
+    ),
+    opts_hover_inv(css = "opacity:1"),
+    opts_toolbar(saveaspng = FALSE)
+  )
+)
+```
+
+::: {layout-ncol="2"}
+```{r}
+#| echo: false
+#| eval: false
+knitr::include_url("html/ggiraph.html")
+```
+
+Interactive map, with hover animation and on-click execution.
+:::
+
+## [terra](https://rspatial.github.io/terra/) {.smaller}
+
+```{r}
+#| eval: true
+#| output: asis
+#| echo: false
+f_logo("terra")
+```
+
+```{r}
+plet(
+  vect(arg1),
+  col = "#74acdf",
+  border = "white",
+  lwd = 2,
+  alpha = 1
+)
+```
+
+::: {layout-ncol="2"}
+```{r}
+#| echo: false
+#| eval: false
+knitr::include_url("html/terra.html")
+```
+
+Basic interactive map made with `{terra}` using `{leaflet}`.
+:::
+
+## [leaflet](https://rstudio.github.io/leaflet/) {.smaller}
+
+```{r}
+#| eval: true
+#| output: asis
+#| echo: false
+f_logo("leaflet")
+```
+
+```{r}
+library(leaflet)
+library(leafem)
+library(leaflet.extras)
+
+leaflet(arg1) |>
+  setView(
+    lng = -67.21083,
+    lat = -40.41021,
+    zoom = 4
+  ) |>
+  addTiles(group = "OSM (default)") |>
+  addProviderTiles(
+    providers$CartoDB.Positron,
+    group = "Positron (minimal)"
+  ) |>
+  addProviderTiles(
+    providers$Esri.WorldImagery,
+    group = "World Imagery (satellite)"
+  ) |>
+  addPolygons(
+    fillColor = "#75aee0",
+    fillOpacity = 1,
+    stroke = TRUE,
+    weight = .6,
+    color = "white",
+    opacity = 1,
+    label = ~ paste0(
+      "Provincia: ",
+      Provincia
+    ),
+    group = "Provincias de Argentina",
+    highlightOptions = highlightOptions(
+      fillColor = "#f6b40e"
+    )
+  ) |>
+  addFullscreenControl(
+    position = "bottomright"
+  ) |>
+  addLogo(
+    img = "img/logo_ig2.png",
+    width = round(330 / 3),
+    height = round(90 / 3),
+    position = "bottomleft"
+  ) |>
+  addResetMapButton() |>
+  addLayersControl(
+    baseGroups = c(
+      "OSM (default)",
+      "Positron (minimal)",
+      "World Imagery (satellite)"
+    ),
+    overlayGroups = "Provincias de Argentina",
+    options = layersControlOptions(
+      collapsed = FALSE,
+      position = "topright"
+    )
+  )
+```
+
+::: {layout-ncol="2"}
+```{r}
+#| echo: false
+#| eval: false
+knitr::include_url("html/leaflet.html")
+```
+
+Interactive map with home and reset button, zoom, background tiles selection and active layer toggle. Data and highlight on hover.
+:::
+
+## [tmap](https://r-tmap.github.io/tmap/index.html) {.smaller}
+
+```{r}
+#| eval: true
+#| output: asis
+#| echo: false
+f_logo("tmap")
+```
+
+```{r}
+#| eval: false
+library(tmap)
+library(tmap.mapgl)
+
+tmap_mode("maplibre")
+
+tm_shape(arg2) +
+  tm_polygons(
+    lwd = 2,
+    fill = "#75aee0",
+    hover = "Provincia",
+    popup.vars = FALSE,
+    col = "white"
+  ) +
+  tm_fullscreen()
+```
+
+::: {layout-ncol="2"}
+```{r}
+#| echo: false
+#| eval: false
+knitr::include_url("html/tmap.html")
+```
+
+Interactive map with full screen button, multiple background tiles and data on hover.
+:::
+
+## [mapgl](https://walker-data.com/mapgl/) {.smaller}
+
+```{r}
+#| eval: true
+#| output: asis
+#| echo: false
+f_logo("mapgl")
+```
+
+```{r}
+library(mapgl)
+
+mapboxgl(
+  center = c(-64.183333, -31.416667),
+  zoom = 3,
+  width = 1000,
+  height = 1000
+) |>
+  add_fill_layer(
+    source = arg1,
+    id = "z",
+    fill_color = "#74acdf",
+    tooltip = "Provincia",
+    hover_options = list(
+      fill_color = "#f6b40e"
+    )
+  ) |>
+  add_line_layer(
+    source = arg1,
+    id = "2",
+    line_width = 1,
+    line_color = "white"
+  ) |>
+  add_fullscreen_control(position = "bottom-left") |>
+  add_navigation_control(show_compass = TRUE, position = "top-left") |>
+  add_reset_control(position = "bottom-right")
+```
+
+# 3D maps
+
+## [terra](https://rspatial.github.io/terra/) {.smaller}
+
+```{r}
+#| eval: true
+#| output: asis
+#| echo: false
+f_logo("terra")
+```
+
+```{r}
+slope <- terrain(r, "slope", unit = "radians")
+aspect <- terrain(r, "aspect", unit = "radians")
+s <- shade(slope, aspect, 10, 60)
+plot(s, col = grey(0:100 / 100), legend = FALSE, mar = c(2, 2, 1, 4))
+plot(
+  r,
+  col = tidyterra::hypso.colors(
+    500,
+    palette = "gmt_globe_hypso",
+    alpha = .6
+  ),
+  add = TRUE
+)
+```
+
+::: {layout-ncol="2"}
+![](fig/3d_terra.png)
+
+Shaded map with elevation.
+:::
+
+## [terra](https://rspatial.github.io/terra/) {.smaller}
+
+```{r}
+#| eval: true
+#| output: asis
+#| echo: false
+f_logo("terra")
+```
+
+```{r}
+slope <- terrain(r, "slope", unit = "radians")
+aspect <- terrain(r, "aspect", unit = "radians")
+
+f_hill <- function(ángulo, dirección) {
+  shade(slope, aspect, ángulo, dirección)
+}
+
+ang <- seq(0, 350, 10)
+ang_chr <- dplyr::case_when(
+  ang < 10 ~ paste0("00", ang),
+  ang < 100 ~ paste0("0", ang),
+  .default = as.character(ang)
+)
+
+l_angulo <- 80 # 10, 45, 80
+
+l_hill <- purrr::map(
+  ang,
+  ~ f_hill(ángulo = l_angulo, dirección = .x)
+)
+
+purrr::walk2(
+  l_hill,
+  ang_chr,
+  \(X, Y) {
+    png(
+      filename = paste0("3d_terra/", Y, ".png"),
+      width = 700,
+      height = 500,
+      units = "px",
+      res = 200
+    )
+    plot(
+      X,
+      col = grey(0:100 / 100),
+      legend = FALSE,
+      axes = FALSE,
+      mar = c(0, 0, 0, 0)
+    )
+    plot(
+      r,
+      col = tidyterra::hypso.colors(
+        500,
+        palette = "gmt_globe_hypso",
+        alpha = .6
+      ),
+      axes = FALSE,
+      legend = FALSE,
+      add = TRUE
+    )
+    dev.off()
+  }
+)
+
+gifski::gifski(
+  list.files(
+    "3d_terra/",
+    full.names = TRUE
+  ),
+  gif_file = paste0(
+    "gifs/3d_terra",
+    l_angulo,
+    ".gif"
+  ),
+  width = 700,
+  height = 500,
+  delay = 1 / 10,
+  loop = TRUE,
+  progress = FALSE
+)
+```
+
+::: {layout-nrow=1 layout-valign="center"}
+![](https://raw.githubusercontent.com/vhgauto/seminario3-gulich/refs/heads/main/gifs/3d_terra10.gif)
+
+![](https://raw.githubusercontent.com/vhgauto/seminario3-gulich/refs/heads/main/gifs/3d_terra45.gif)
+
+![](https://raw.githubusercontent.com/vhgauto/seminario3-gulich/refs/heads/main/gifs/3d_terra80.gif)
+:::
+
+Animated map with dynamic light/shadow directions.
+
+## [rayshader](https://www.rayshader.com/)  {.smaller}
+
+```{r}
+#| eval: true
+#| output: asis
+#| echo: false
+f_logo("rayshader")
+```
+
+```{r}
+library(rayshader)
+
+m <- raster_to_matrix(r)
+m |>
+  height_shade(
+    texture = colorRampPalette(
+      c(
+        tidyterra::hypso.colors(10, palette = "gmt_globe_hypso")
+      )
+    )(1024)
+  ) |>
+  plot_3d(
+    heightmap = m,
+    background = "grey95",
+    windowsize = c(600, 450),
+    zscale = 30,
+    solid = FALSE,
+    shadow = TRUE,
+    shadow_darkness = 1
+  )
+
+render_camera(
+  theta = 0,
+  phi = 60,
+  zoom = .55
+)
+
+render_highquality(
+  filename = "fig/rayshader.png",
+  preview = TRUE,
+  light = FALSE,
+  environment_light = "hdri/snow_field_4k.hdr",
+  intensity_env = 1,
+  interactive = FALSE,
+  width = 2000,
+  height = 1500,
+  samples = 256
+)
+```
+
+::: {layout-ncol="2"}
+![](fig/rayshader.png)
+
+Elevated 3D map with a terrain color palette and ambiental lighting and natural shadows.
+:::
+
+## [rayshader](https://www.rayshader.com/) {.smaller}
+
+```{r}
+#| eval: true
+#| output: asis
+#| echo: false
+f_logo("rayshader")
+```
+
+```{r}
+library(rayshader)
+
+m <- raster_to_matrix(r)
+m |>
+  height_shade(
+    texture = colorRampPalette(
+      c(
+        tidyterra::hypso.colors(10, palette = "gmt_globe_hypso")
+      )
+    )(1024)
+  ) |>
+  plot_3d(
+    heightmap = m,
+    background = "white",
+    windowsize = c(600, 450),
+    zscale = 30,
+    solid = FALSE,
+    shadow = TRUE,
+    shadow_darkness = 1
+  )
+
+purrr::walk(
+  seq(0, 350, 10),
+  \(i) {
+    ii <- dplyr::case_when(
+      i < 10 ~ paste0("00", i),
+      i < 100 ~ paste0("0", i),
+      .default = as.character(i)
+    )
+    render_camera(
+      theta = 0,
+      phi = 60,
+      zoom = .55
+    )
+    render_highquality(
+      filename = paste0("ray/", ii, ".png"),
+      preview = TRUE,
+      light = TRUE,
+      title_text = "Elevación Las Heras",
+      title_font = "Times",
+      title_color = "#FFFFFF",
+      title_bar_color = "#224289",
+      title_bar_alpha = 1,
+      lightdirection = c(i, 315),
+      lightaltitude = 45,
+      lightintensity = c(500, 100),
+      intensity_env = 1,
+      interactive = FALSE,
+      width = 1000,
+      height = 750,
+      samples = 128
+    )
+    print(ii)
+  }
+)
+
+rgl::close3d()
+
+gifski::gifski(
+  list.files("ray/", full.names = TRUE),
+  gif_file = "gifs/rayshader.gif",
+  width = 1000,
+  height = 750,
+  delay = 1 / 20,
+  loop = TRUE,
+  progress = TRUE
+)
+```
+
+::: {layout-ncol="2"}
+![](https://raw.githubusercontent.com/vhgauto/seminario3-gulich/refs/heads/main/gifs/rayshader.gif)
+
+Animated version with double dynamic light/shadow.
+:::
