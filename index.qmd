@@ -49,8 +49,10 @@ format:
     incremental: false
     transition: none
     logo: https://ig.conae.unc.edu.ar/wp-content/uploads/sites/68/2022/04/G-CLARO-C.png
+    # footer: |
+    #   <b class="fondo-azul"><blanco>Víctor Gauto <rosa>{{< iconify svg-spinners:pulse >}}</rosa> Better maps with <rosa>R</rosa></blanco></b>
     footer: |
-      <b class="fondo-azul"><blanco>Víctor Gauto <rosa>{{< iconify svg-spinners:pulse >}}</rosa> Better maps with <rosa>R</rosa></blanco></b>
+      <rosa>Víctor Gauto {{< iconify svg-spinners:pulse >}} Better maps with `R`</rosa>
     slide-number: true
     progress: true
     hash-type: title
@@ -1328,6 +1330,7 @@ f_logo("ggiraph")
 library(ggiraph)
 library(ggplot2)
 library(showtext)
+library(ggtext)
 library(htmltools)
 
 font_add_google(name = "Tinos", family = "tinos")
@@ -1346,28 +1349,39 @@ p <- ggplot() +
       ),
     ),
     fill = "#75aee0",
-    linewidth = 12,
     color = "#e5e5e5"
   ) +
-  labs(title = "Provincias de Argentina") +
-  coord_sf(clip = "off") +
-  theme_void(
-    base_size = 800,
-    base_family = "tinos"
+  annotate(
+    geom = "richtext",
+    x = I(c(-1.7, -1.7, -1.7)),
+    y = I(c(.9, .8, .1)),
+    hjust = 0,
+    label = c(
+      "República <b style='color: #75aee0;'>Argentina</b>",
+      "Click en cualquier provincia para<br>visitar su página en **Wikipedia**",
+      "**Víctor Gauto | @vhgauto**"
+    ),
+    fill = c(NA, NA, "#75aee0"),
+    label.color = NA,
+    label.r = unit(0, "line"),
+    size = c(7, 4, 3),
+    color = c("black", "black", "white"),
+    # size.unit = "pt",
+    family = "tinos"
   ) +
+  coord_sf(clip = "off") +
+  theme_void(base_family = "tinos") +
   theme_sub_plot(
-    title = element_text(
-      hjust = 0,
-      vjust = -3,
-      margin = margin_auto(100)
-    )
+    margin = margin(r = -300),
+    title = element_text(hjust = 0),
+    subtitle = ggtext::element_markdown()
   )
 
 girafe(
   ggobj = p,
   bg = "#e5e5e5",
-  height_svg = 500,
-  width_svg = 500,
+  # height_svg = 500,
+  # width_svg = 500,
   options = list(
     opts_tooltip(
       css = glue(
