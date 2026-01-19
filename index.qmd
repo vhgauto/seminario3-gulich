@@ -1012,6 +1012,109 @@ ggplot() +
 Styled title, subtitle and caption, scale and compass, grid and coordinates, points of interest.
 :::
 
+# Real color maps
+
+## [terra](https://rspatial.github.io/terra/) {.smaller}
+
+<!-- f_png("rgb_terra", alto = 5.7) -->
+
+```{r}
+#| eval: true
+#| output: asis
+#| echo: false
+f_logo("terra")
+```
+
+```{r}
+plotRGB(mt, main = "Las Heras, Mendoza", mar = c(0, 0, 1.4, 0))
+# anotación, texto
+text(
+  ac,
+  labels = "Aconcagua (6960 m)",
+  halo = TRUE,
+  adj = c(.25, -1)
+)
+text(
+  lh,
+  labels = "Las Heras",
+  halo = TRUE,
+  adj = c(1.1, -.5)
+)
+lines(lh_v, col = "white", lty = 1)
+lines(lh_v, col = "black", lty = 2)
+# brújula
+north(
+  xy = "topright",
+  type = 2,
+  label = "",
+  cex = 1,
+  col = "white"
+)
+
+# anotación, punto
+points(ac, pch = 24, cex = 1, col = "black", bg = "gold")
+points(lh, pch = 21, cex = 1, col = "black", bg = "gold")
+```
+
+::: {layout-ncol="2"}
+![](fig/rgb_terra.png)
+
+RGB composition map with labeled points of interest, north arrow and title.
+:::
+
+## [tidyterra](https://dieghernan.github.io/tidyterra/) {.smaller}
+
+```{r}
+#| eval: true
+#| output: asis
+#| echo: false
+f_logo("tidyterra")
+```
+
+```{r}
+ggplot() +
+  geom_spatraster_rgb(data = mt) +
+  geom_spatvector(
+    data = lh_v,
+    color = "white",
+    fill = NA,
+    linetype = 1,
+    linewidth = .3
+  ) +
+  geom_spatvector(
+    data = lh_v,
+    color = "black",
+    fill = NA,
+    linetype = 2,
+    linewidth = .3
+  ) +
+  geom_spatvector(
+    data = p,
+    color = "black",
+    size = 3,
+    fill = "gold",
+    shape = 21
+  ) +
+  coord_sf(expand = FALSE) +
+  annotation_north_arrow(
+    location = "tr",
+    height = unit(.6, "cm"),
+    width = unit(.4, "cm")
+  ) +
+  annotation_scale(location = "bl", text_col = "white") +
+  labs(
+    title = "Las Heras, Mendoza",
+    caption = "Víctor Gauto | @vhgauto"
+  ) +
+  theme_void(base_family = "tinos")
+```
+
+::: {layout-ncol="2"}
+![](fig/rgb_tidyterra.png)
+
+RGB composition map with points of interest, north arrow, scale and title.
+:::
+
 # Animated maps
 
 ## [terra](https://rspatial.github.io/terra/) {.smaller}
@@ -1113,19 +1216,25 @@ f_png <- function(i) {
 
 purrr::walk(1:12, f_png)
 
-gifski::gifski(
-  list.files("anim/", full.names = TRUE),
-  gif_file = "gifs/terra.gif",
-  width = 1000,
-  height = 1000,
-  delay = 1 / 2,
-  loop = TRUE,
-  progress = FALSE
+# gifski::gifski(
+#   list.files("anim/", full.names = TRUE),
+#   gif_file = "gifs/terra.gif",
+#   width = 1000,
+#   height = 1000,
+#   delay = 1 / 2,
+#   loop = TRUE,
+#   progress = FALSE
+# )
+
+av::av_encode_video(
+  input = list.files("anim/", full.names = TRUE),
+  output = "gifs/terra.mp4",
+  framerate = 2
 )
 ```
 
 ::: {layout-ncol="2"}
-![](https://raw.githubusercontent.com/vhgauto/seminario3-gulich/refs/heads/main/gifs/terra.gif)
+![](gifs/terra.mp4){loop="true"}
 
 Animated map made from single figures per layer, compiled in a `.gif` file. This technique can be applied to all mentioned methods for map plotting.
 :::
@@ -1191,14 +1300,14 @@ tmap_anim <- tm_shape(t_lh) +
 
 tmap_animation(
   tmap_anim,
-  "gifs/tmap.gif",
+  "gifs/tmap.mp4",
   width = 1000,
   height = 750
 )
 ```
 
 ::: {layout-ncol="2"}
-![](https://raw.githubusercontent.com/vhgauto/seminario3-gulich/refs/heads/main/gifs/tmap.gif)
+![](gifs/tmap.mp4){loop="true"}
 
 `{tmap}` offers a specific funtion to create animated maps from the raster layers.
 :::
@@ -1300,275 +1409,54 @@ anim <- ggplot() +
   )
 
 anim_save(
-  filename = "gifs/gganimate.gif",
+  filename = "gifs/gganimate.mp4",
   animation = anim,
+  renderer = av_renderer(),
   width = 1000,
   height = 800,
   res = 300,
-  duration = 6
+  fps = 15
 )
 ```
 
 ::: {layout-ncol="2"}
-![](https://raw.githubusercontent.com/vhgauto/seminario3-gulich/refs/heads/main/gifs/gganimate.gif)
+![](gifs/gganimate.mp4){loop="true"}
 
 Animated map created by combining `{tidyterra}` with `{gganimate}`, including functions to indicate the layer change in the subtitle.
 :::
 
 # Interactive maps
 
-## [ggiraph](https://davidgohel.github.io/ggiraph/) {.smaller}
+## Packages
 
-```{r}
-#| eval: true
-#| output: asis
-#| echo: false
-f_logo("ggiraph")
-```
+- [ggiraph](https://davidgohel.github.io/ggiraph/) ![](https://davidgohel.github.io/ggiraph/reference/figures/logo.png){height=60}
 
-```{r}
-library(ggiraph)
-library(ggplot2)
-library(showtext)
-library(ggtext)
-library(htmltools)
+- [terra](https://rspatial.github.io/terra/) ![](https://rspatial.github.io/terra/logo.png){height=60}
 
-font_add_google(name = "Tinos", family = "tinos")
-showtext_auto()
-showtext_opts(dpi = 300)
+- [leaflet](https://rstudio.github.io/leaflet/) ![](https://leafletjs.com/docs/images/logo.png){height=60}
 
-p <- ggplot() +
-  geom_sf_interactive(
-    data = arg3,
-    aes(
-      tooltip = Provincia,
-      data_id = Provincia,
-      onclick = sprintf(
-        "window.open(\"http://es.wikipedia.org/wiki/%s\")",
-        paste0("Provincia_de_", gsub(" ", "_", Provincia))
-      ),
-    ),
-    fill = "#75aee0",
-    color = "#e5e5e5"
-  ) +
-  annotate(
-    geom = "richtext",
-    x = I(c(-1.7, -1.7, -1.7)),
-    y = I(c(.9, .8, .1)),
-    hjust = 0,
-    label = c(
-      "República <b style='color: #75aee0;'>Argentina</b>",
-      "Click en cualquier provincia para<br>visitar su página en **Wikipedia**",
-      "**Víctor Gauto | @vhgauto**"
-    ),
-    fill = c(NA, NA, "#75aee0"),
-    label.color = NA,
-    label.r = unit(0, "line"),
-    size = c(7, 4, 3),
-    color = c("black", "black", "white"),
-    # size.unit = "pt",
-    family = "tinos"
-  ) +
-  coord_sf(clip = "off") +
-  theme_void(base_family = "tinos") +
-  theme_sub_plot(
-    margin = margin(r = -300),
-    title = element_text(hjust = 0),
-    subtitle = ggtext::element_markdown()
-  )
+- [tmap.mapgl](https://r-tmap.github.io/tmap/index.html) ![](https://r-tmap.github.io/tmap.mapgl/logo.png){height=60}
 
-girafe(
-  ggobj = p,
-  bg = "#e5e5e5",
-  # height_svg = 500,
-  # width_svg = 500,
-  options = list(
-    opts_tooltip(
-      css = glue(
-        "background-color:white;color:black;padding:5px;",
-        "font-weight:bold;font-size:15pt;border-radius:0px;",
-        "border-style:solid;border-color:black;border-width:1px;",
-        "font-family:Lato;"
-      ),
-      opacity = 1
-    ),
-    opts_hover(
-      css = girafe_css(
-        css = "",
-        area = glue("fill:#f6b40e;")
-      )
-    ),
-    opts_hover_inv(css = "opacity:1"),
-    opts_toolbar(saveaspng = FALSE)
-  )
-)
-```
+- [mapgl](https://walker-data.com/mapgl/) ![](https://walker-data.com/mapgl/logo.png){height=60}
 
-::: {layout-ncol="2"}
-```{r}
-#| echo: false
-#| eval: false
-knitr::include_url("html/ggiraph.html")
-```
+## {.unnumbered}
 
-Interactive map, with hover animation and on-click execution.
+::: {.r-fit-text}
+
+[Web site {{< iconify tabler:external-link >}}](https://vhgauto.quarto.pub/mapas_interactivos/)
+
 :::
 
-## [terra](https://rspatial.github.io/terra/) {.smaller}
+::: {.r-fit-text}
 
-```{r}
-#| eval: true
-#| output: asis
-#| echo: false
-f_logo("terra")
+```{.r}
+https://vhgauto.quarto.pub/mapas_interactivos/
 ```
 
-```{r}
-plet(
-  vect(arg1),
-  col = "#74acdf",
-  border = "white",
-  lwd = 2,
-  alpha = 1
-)
-```
-
-::: {layout-ncol="2"}
-```{r}
-#| echo: false
-#| eval: false
-knitr::include_url("html/terra.html")
-```
-
-Basic interactive map made with `{terra}` using `{leaflet}`.
 :::
 
-## [leaflet](https://rstudio.github.io/leaflet/) {.smaller}
-
-```{r}
-#| eval: true
-#| output: asis
-#| echo: false
-f_logo("leaflet")
-```
-
-```{r}
-library(leaflet)
-library(leafem)
-library(leaflet.extras)
-
-leaflet(arg1) |>
-  setView(
-    lng = -67.21083,
-    lat = -40.41021,
-    zoom = 4
-  ) |>
-  addTiles(group = "OSM (default)") |>
-  addProviderTiles(
-    providers$CartoDB.Positron,
-    group = "Positron (minimal)"
-  ) |>
-  addProviderTiles(
-    providers$Esri.WorldImagery,
-    group = "World Imagery (satellite)"
-  ) |>
-  addPolygons(
-    fillColor = "#75aee0",
-    fillOpacity = 1,
-    stroke = TRUE,
-    weight = .6,
-    color = "white",
-    opacity = 1,
-    label = ~ paste0(
-      "Provincia: ",
-      Provincia
-    ),
-    group = "Provincias de Argentina",
-    highlightOptions = highlightOptions(
-      fillColor = "#f6b40e"
-    )
-  ) |>
-  addFullscreenControl(
-    position = "bottomright"
-  ) |>
-  addLogo(
-    img = "img/logo_ig2.png",
-    width = round(330 / 3),
-    height = round(90 / 3),
-    position = "bottomleft"
-  ) |>
-  addResetMapButton() |>
-  addLayersControl(
-    baseGroups = c(
-      "OSM (default)",
-      "Positron (minimal)",
-      "World Imagery (satellite)"
-    ),
-    overlayGroups = "Provincias de Argentina",
-    options = layersControlOptions(
-      collapsed = FALSE,
-      position = "topright"
-    )
-  )
-```
-
-::: {layout-ncol="2"}
 ```{r}
 #| echo: false
-#| eval: false
-knitr::include_url("html/leaflet.html")
-```
-
-Interactive map with home and reset button, zoom, background tiles selection and active layer toggle. Data and highlight on hover.
-:::
-
-## [tmap](https://r-tmap.github.io/tmap/index.html) {.smaller}
-
-```{r}
-#| eval: true
-#| output: asis
-#| echo: false
-f_logo("tmap")
-```
-
-```{r}
-#| eval: false
-library(tmap)
-library(tmap.mapgl)
-
-tmap_mode("maplibre")
-
-tm_shape(arg2) +
-  tm_polygons(
-    lwd = 2,
-    fill = "#75aee0",
-    hover = "Provincia",
-    popup.vars = FALSE,
-    col = "white"
-  ) +
-  tm_fullscreen()
-```
-
-::: {layout-ncol="2"}
-```{r}
-#| echo: false
-#| eval: false
-knitr::include_url("html/tmap.html")
-```
-
-Interactive map with full screen button, multiple background tiles and data on hover.
-:::
-
-## [mapgl](https://walker-data.com/mapgl/) {.smaller}
-
-```{r}
-#| eval: true
-#| output: asis
-#| echo: false
-f_logo("mapgl")
-```
-
-```{r}
 library(mapgl)
 
 mapboxgl(
@@ -1694,30 +1582,40 @@ purrr::walk2(
   }
 )
 
-gifski::gifski(
-  list.files(
-    "3d_terra/",
-    full.names = TRUE
-  ),
-  gif_file = paste0(
+# gifski::gifski(
+#   list.files(
+#     "3d_terra/",
+#     full.names = TRUE
+#   ),
+#   gif_file = paste0(
+#     "gifs/3d_terra",
+#     l_angulo,
+#     ".gif"
+#   ),
+#   width = 700,
+#   height = 500,
+#   delay = 1 / 10,
+#   loop = TRUE,
+#   progress = FALSE
+# )
+
+av::av_encode_video(
+  input = list.files("3d_terra/", full.names = TRUE),
+  output = paste0(
     "gifs/3d_terra",
     l_angulo,
-    ".gif"
+    ".mp4"
   ),
-  width = 700,
-  height = 500,
-  delay = 1 / 10,
-  loop = TRUE,
-  progress = FALSE
+  framerate = 10
 )
 ```
 
 ::: {layout-nrow=1 layout-valign="center"}
-![](https://raw.githubusercontent.com/vhgauto/seminario3-gulich/refs/heads/main/gifs/3d_terra10.gif)
+![](gifs/3d_terra10.mp4){loop="true"}
 
-![](https://raw.githubusercontent.com/vhgauto/seminario3-gulich/refs/heads/main/gifs/3d_terra45.gif)
+![](gifs/3d_terra45.mp4){loop="true"}
 
-![](https://raw.githubusercontent.com/vhgauto/seminario3-gulich/refs/heads/main/gifs/3d_terra80.gif)
+![](gifs/3d_terra80.mp4){loop="true"}
 :::
 
 Animated map with dynamic light/shadow directions.
@@ -1846,19 +1744,25 @@ purrr::walk(
 
 rgl::close3d()
 
-gifski::gifski(
-  list.files("ray/", full.names = TRUE),
-  gif_file = "gifs/rayshader.gif",
-  width = 1000,
-  height = 750,
-  delay = 1 / 20,
-  loop = TRUE,
-  progress = TRUE
+# gifski::gifski(
+#   list.files("ray/", full.names = TRUE),
+#   gif_file = "gifs/rayshader.gif",
+#   width = 1000,
+#   height = 750,
+#   delay = 1 / 20,
+#   loop = TRUE,
+#   progress = TRUE
+# )
+
+av::av_encode_video(
+  input = list.files("ray/", full.names = TRUE),
+  output = "gifs/rayshader.mp4",
+  framerate = 10
 )
 ```
 
 ::: {layout-ncol="2"}
-![](https://raw.githubusercontent.com/vhgauto/seminario3-gulich/refs/heads/main/gifs/rayshader.gif)
+![](gifs/rayshader.mp4){loop="true"}
 
 Animated version with double dynamic light/shadow.
 :::
