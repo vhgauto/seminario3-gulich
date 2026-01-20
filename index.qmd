@@ -49,8 +49,6 @@ format:
     incremental: false
     transition: none
     logo: https://ig.conae.unc.edu.ar/wp-content/uploads/sites/68/2022/04/G-CLARO-C.png
-    # footer: |
-    #   <b class="fondo-azul"><blanco>Víctor Gauto <rosa>{{< iconify svg-spinners:pulse >}}</rosa> Better maps with <rosa>R</rosa></blanco></b>
     footer: |
       <rosa>Víctor Gauto {{< iconify svg-spinners:pulse >}} Better maps with `R`</rosa>
     slide-number: true
@@ -86,7 +84,7 @@ editor_options:
 # - pointer
 ---
 
-# Outline
+# Outline {.center}
 
 - Introduction 
 - Motivation
@@ -107,16 +105,33 @@ https://vhgauto.github.io/seminario3-gulich/
 
 :::
 
-# Introduction {#sec-introduction}
+# Introduction {#sec-introduction .center}
 
 A good map is an [appealing]{.fragment .hl-blanco fragment-index=1} and [useful]{.fragment .hl-blanco fragment-index=1} plot, that combines <u>design</u>, <u>geography</u> and <u>GIS</u>.
 
 ![](img/Minard.png){width="80%" fig-align="center"}
 
+# Motivation {.center}
 
-# Motivation
+The motivation.
 
-# Static maps {#sec-static}
+# Static maps {#sec-static .center}
+
+Maps as figures (`.png`) to use in publications, posters, social media and news.
+
+:::: {layout-ncol="2"}
+
+::: {.callout-note icon=false}
+
+## Data
+
+Elevation from <b>Las Heras</b> department in Mendoza province to demostrate different packages and results.
+
+Las Heras city and Aconcagua mountain locations.
+
+:::
+
+::::
 
 ```{r}
 #| echo: false
@@ -632,6 +647,32 @@ Point size, color and fill mapped to variables, categorical faceted maps.
 ![](https://r-tmap.github.io/tmap/articles/examples_gridmaps_files/figure-html/unnamed-chunk-5-1.png)
 :::
 
+## [tmap](https://r-tmap.github.io/tmap/index.html) {.smaller}
+
+::: {layout-ncol="4"}
+
+![](https://r-tmap.github.io/tmap.mapgl/logo.png)
+
+![](https://r-tmap.github.io/tmap.cartogram/logo.png)
+
+![](https://r-tmap.github.io/tmap.glyphs/logo.png)
+
+![](https://r-tmap.github.io/tmap.networks/logo.png)
+
+:::
+
+::: {layout-ncol="4"}
+
+[tmap.mapgl](https://r-tmap.github.io/tmap.mapgl/index.html)
+
+[tmap.cartogram](https://r-tmap.github.io/tmap.cartogram/index.html)
+
+[tmap.glyphs](https://r-tmap.github.io/tmap.glyphs/index.html)
+
+[tmap.networks](https://r-tmap.github.io/tmap.networks/index.html)
+
+:::
+
 ## [tidyterra](https://dieghernan.github.io/tidyterra/) {.smaller}
 
 ```{r}
@@ -1012,7 +1053,23 @@ ggplot() +
 Styled title, subtitle and caption, scale and compass, grid and coordinates, points of interest.
 :::
 
-# Real color maps
+# Real color maps {.center}
+
+RGB composition maps to ilustrate Earth surface, useful for context with an easy approach to the real area of interest.
+
+:::: {layout-ncol="2"}
+
+::: {.callout-note icon=false}
+
+## Data
+
+Real color from <b>Las Heras</b> department in Mendoza province to demostrate different packages and results.
+
+Las Heras city and Aconcagua mountain locations.
+
+:::
+
+::::
 
 ## [terra](https://rspatial.github.io/terra/) {.smaller}
 
@@ -1026,22 +1083,24 @@ f_logo("terra")
 ```
 
 ```{r}
-plotRGB(mt, main = "Las Heras, Mendoza", mar = c(0, 0, 1.4, 0))
+plotRGB(mt, main = "Las Heras, Mendoza", mar = c(0, 0, 2, 0), cex.main = 2)
 # anotación, texto
 text(
   ac,
   labels = "Aconcagua (6960 m)",
   halo = TRUE,
-  adj = c(.25, -1)
+  adj = c(0, -1),
+  cex = 1.2
 )
 text(
   lh,
   labels = "Las Heras",
   halo = TRUE,
-  adj = c(1.1, -.5)
+  adj = c(1.1, -.5),
+  cex = 1.2
 )
-lines(lh_v, col = "white", lty = 1)
-lines(lh_v, col = "black", lty = 2)
+lines(lh_v, col = "white", lty = 1, lwd = 2.5)
+lines(lh_v, col = "black", lty = 3, lwd = 2.5)
 # brújula
 north(
   xy = "topright",
@@ -1050,10 +1109,9 @@ north(
   cex = 1,
   col = "white"
 )
-
 # anotación, punto
-points(ac, pch = 24, cex = 1, col = "black", bg = "gold")
-points(lh, pch = 21, cex = 1, col = "black", bg = "gold")
+points(ac, pch = 24, cex = 2, col = "black", bg = "gold")
+points(lh, pch = 21, cex = 2, col = "black", bg = "gold")
 ```
 
 ::: {layout-ncol="2"}
@@ -1079,21 +1137,35 @@ ggplot() +
     color = "white",
     fill = NA,
     linetype = 1,
-    linewidth = .3
+    linewidth = 1
   ) +
   geom_spatvector(
     data = lh_v,
     color = "black",
     fill = NA,
-    linetype = 2,
-    linewidth = .3
+    linetype = 3,
+    linewidth = 1
   ) +
   geom_spatvector(
     data = p,
     color = "black",
-    size = 3,
+    size = 5,
+    stroke = 1.5,
     fill = "gold",
     shape = 21
+  ) +
+  geom_spatvector_label(
+    data = p,
+    aes(label = label),
+    family = "tinos",
+    size = 4,
+    fill = "grey10",
+    color = "white",
+    label.size = 0,
+    label.padding = unit(0.1, "lines"),
+    hjust = c(0, .5),
+    vjust = c(1.5, -.5),
+    fontface = "bold"
   ) +
   coord_sf(expand = FALSE) +
   annotation_north_arrow(
@@ -1101,12 +1173,16 @@ ggplot() +
     height = unit(.6, "cm"),
     width = unit(.4, "cm")
   ) +
-  annotation_scale(location = "bl", text_col = "white") +
+  annotation_scale(
+    location = "bl",
+    text_col = "white",
+    text_cex = 1.2
+  ) +
   labs(
     title = "Las Heras, Mendoza",
     caption = "Víctor Gauto | @vhgauto"
   ) +
-  theme_void(base_family = "tinos")
+  theme_void(base_family = "tinos", base_size = 20)
 ```
 
 ::: {layout-ncol="2"}
@@ -1115,7 +1191,21 @@ ggplot() +
 RGB composition map with points of interest, north arrow, scale and title.
 :::
 
-# Animated maps
+# Animated maps {.center}
+
+Used to indicate change, evolution in time and progress.
+
+:::: {layout-ncol="2"}
+
+::: {.callout-note icon=false}
+
+## Data
+
+Monthly mean temperature, from 1970 to 2000, Las Heras Department, Mendoza Province.
+
+:::
+
+::::
 
 ## [terra](https://rspatial.github.io/terra/) {.smaller}
 
@@ -1425,19 +1515,51 @@ anim_save(
 Animated map created by combining `{tidyterra}` with `{gganimate}`, including functions to indicate the layer change in the subtitle.
 :::
 
-# Interactive maps
+# Interactive maps {.center}
+
+Maps were the user can play, zoom in/out, click and hover with the mouse. Usually found in web sites and mobile apps.
+
+:::: {layout-ncol="2"}
+
+::: {.callout-note icon=false}
+
+## Data
+
+Argentina map with provinces division and names.
+
+:::
+
+::::
 
 ## Packages
 
-- [ggiraph](https://davidgohel.github.io/ggiraph/) ![](https://davidgohel.github.io/ggiraph/reference/figures/logo.png){height=60}
+::: {layout-ncol="5" layout-valign="center"}
 
-- [terra](https://rspatial.github.io/terra/) ![](https://rspatial.github.io/terra/logo.png){height=60}
+![](https://davidgohel.github.io/ggiraph/reference/figures/logo.png)
 
-- [leaflet](https://rstudio.github.io/leaflet/) ![](https://leafletjs.com/docs/images/logo.png){height=60}
+![](https://rspatial.github.io/terra/logo.png)
 
-- [tmap.mapgl](https://r-tmap.github.io/tmap/index.html) ![](https://r-tmap.github.io/tmap.mapgl/logo.png){height=60}
+![](https://leafletjs.com/docs/images/logo.png)
 
-- [mapgl](https://walker-data.com/mapgl/) ![](https://walker-data.com/mapgl/logo.png){height=60}
+![](https://r-tmap.github.io/tmap.mapgl/logo.png)
+
+![](https://walker-data.com/mapgl/logo.png)
+
+:::
+
+::: {layout-ncol="5"}
+
+[ggiraph](https://davidgohel.github.io/ggiraph/)
+
+[terra](https://rspatial.github.io/terra/)
+
+[leaflet](https://rstudio.github.io/leaflet/)
+
+[tmap.mapgl](https://r-tmap.github.io/tmap/index.html)
+
+[mapgl](https://walker-data.com/mapgl/)
+
+:::
 
 ## {.unnumbered}
 
@@ -1485,7 +1607,21 @@ mapboxgl(
   add_reset_control(position = "bottom-right")
 ```
 
-# 3D maps
+# 3D maps {.center}
+
+Visually atractive maps that show elevation related to a continuous variable, usually the terrain.
+
+:::: {layout-ncol="2"}
+
+::: {.callout-note icon=false}
+
+## Data
+
+Elevation from <b>Las Heras</b> department in Mendoza province to demostrate different packages and results.
+
+:::
+
+::::
 
 ## [terra](https://rspatial.github.io/terra/) {.smaller}
 
