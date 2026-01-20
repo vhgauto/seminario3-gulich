@@ -47,6 +47,7 @@ format:
     highlight-style: kate
     width: 1200
     incremental: false
+    reference-location: document
     transition: none
     logo: https://ig.conae.unc.edu.ar/wp-content/uploads/sites/68/2022/04/G-CLARO-C.png
     footer: |
@@ -64,7 +65,8 @@ format:
       # - flatly
       - extras/mi_estilo.scss
     include-in-header:
-      - extras/favicon.html
+      - text: |
+          <link rel='shortcut icon' href='img/favicon.jpg'/>
     #   - extras/hide-logo.html
     # include-after-body:
     #   - extras/hide-menu.html
@@ -113,11 +115,19 @@ A good map is an [appealing]{.fragment .hl-blanco fragment-index=1} and [useful]
 
 # Motivation {.center}
 
-The motivation.
+- Alternative to GUI.
+
+- Creating maps with coding makes reproducibility more accessible.
+
+- Easy to get support and test solutions.
+
+- Facilitate update maps with new data.
+
+- Change styles by variable definitions.
 
 # Static maps {#sec-static .center}
 
-Maps as figures (`.png`) to use in publications, posters, social media and news.
+Maps as figures (`.png`, `.tif`, `.jpg`, `.pdf`, `.svg`) to use in publications, posters, social media and news.
 
 :::: {layout-ncol="2"}
 
@@ -125,13 +135,18 @@ Maps as figures (`.png`) to use in publications, posters, social media and news.
 
 ## Data
 
-Elevation from <b>Las Heras</b> department in Mendoza province to demostrate different packages and results.
+Elevation[^1] from <b>Las Heras</b> department in Mendoza province to demostrate different packages and results.
 
 Las Heras city and Aconcagua mountain locations.
 
 :::
 
 ::::
+
+<br>
+<br>
+
+[^1]: NOAA National Centers for Environmental Information. (2022). ETOPO 2022 15 arc-second global relief model. NOAA National Centers for Environmental Information. <http://doi.org/10.25921/fd45-gt74>
 
 ```{r}
 #| echo: false
@@ -1063,13 +1078,18 @@ RGB composition maps to ilustrate Earth surface, useful for context with an easy
 
 ## Data
 
-Real color from <b>Las Heras</b> department in Mendoza province to demostrate different packages and results.
+Real color[^2] from <b>Las Heras</b> department in Mendoza province to demostrate different packages and results.
 
 Las Heras city and Aconcagua mountain locations.
 
 :::
 
 ::::
+
+<br>
+<br>
+
+[^2]: ESRI World Imagery | Tiles © Esri - Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community.
 
 ## [terra](https://rspatial.github.io/terra/) {.smaller}
 
@@ -1193,7 +1213,7 @@ RGB composition map with points of interest, north arrow, scale and title.
 
 # Animated maps {.center}
 
-Used to indicate change, evolution in time and progress.
+Used to indicate change, evolution in time and progress. The file formats can be images (`.gif`) or video (`.mp4`).
 
 :::: {layout-ncol="2"}
 
@@ -1201,11 +1221,16 @@ Used to indicate change, evolution in time and progress.
 
 ## Data
 
-Monthly mean temperature, from 1970 to 2000, Las Heras Department, Mendoza Province.
+Monthly mean temperature[^3], from 1970 to 2000, Las Heras Department, Mendoza Province.
 
 :::
 
 ::::
+
+<br>
+<br>
+
+[^3]: Fick, S.E. and R.J. Hijmans, 2017. WorldClim 2: new 1km spatial resolution climate surfaces for global land areas. [International Journal of Climatology 37 (12): 4302-4315](https://rmets.onlinelibrary.wiley.com/doi/abs/10.1002/joc.5086).
 
 ## [terra](https://rspatial.github.io/terra/) {.smaller}
 
@@ -1305,16 +1330,6 @@ f_png <- function(i) {
 }
 
 purrr::walk(1:12, f_png)
-
-# gifski::gifski(
-#   list.files("anim/", full.names = TRUE),
-#   gif_file = "gifs/terra.gif",
-#   width = 1000,
-#   height = 1000,
-#   delay = 1 / 2,
-#   loop = TRUE,
-#   progress = FALSE
-# )
 
 av::av_encode_video(
   input = list.files("anim/", full.names = TRUE),
@@ -1517,7 +1532,7 @@ Animated map created by combining `{tidyterra}` with `{gganimate}`, including fu
 
 # Interactive maps {.center}
 
-Maps were the user can play, zoom in/out, click and hover with the mouse. Usually found in web sites and mobile apps.
+Maps were the user can play, zoom in/out, click and hover with the mouse. Usually found in web sites and mobile apps as `.html`.
 
 :::: {layout-ncol="2"}
 
@@ -1525,11 +1540,16 @@ Maps were the user can play, zoom in/out, click and hover with the mouse. Usuall
 
 ## Data
 
-Argentina map with provinces division and names.
+Argentina map[^4] with provinces division and names.
 
 :::
 
 ::::
+
+<br>
+<br>
+
+[^4]: Instituto Geográfico Nacional de la República Argentina (IGN). Geodesia y demarcación, Límites, Polígono,	[Departamento](https://www.ign.gob.ar/NuestrasActividades/InformacionGeoespacial/CapasSIG).
 
 ## Packages
 
@@ -1617,11 +1637,13 @@ Visually atractive maps that show elevation related to a continuous variable, us
 
 ## Data
 
-Elevation from <b>Las Heras</b> department in Mendoza province to demostrate different packages and results.
+Elevation[^1] from <b>Las Heras</b> department in Mendoza province to demostrate different packages and results.
 
 :::
 
 ::::
+
+[^1]: NOAA National Centers for Environmental Information. (2022). ETOPO 2022 15 arc-second global relief model. NOAA National Centers for Environmental Information. <http://doi.org/10.25921/fd45-gt74>
 
 ## [terra](https://rspatial.github.io/terra/) {.smaller}
 
@@ -1717,23 +1739,6 @@ purrr::walk2(
     dev.off()
   }
 )
-
-# gifski::gifski(
-#   list.files(
-#     "3d_terra/",
-#     full.names = TRUE
-#   ),
-#   gif_file = paste0(
-#     "gifs/3d_terra",
-#     l_angulo,
-#     ".gif"
-#   ),
-#   width = 700,
-#   height = 500,
-#   delay = 1 / 10,
-#   loop = TRUE,
-#   progress = FALSE
-# )
 
 av::av_encode_video(
   input = list.files("3d_terra/", full.names = TRUE),
@@ -1880,16 +1885,6 @@ purrr::walk(
 
 rgl::close3d()
 
-# gifski::gifski(
-#   list.files("ray/", full.names = TRUE),
-#   gif_file = "gifs/rayshader.gif",
-#   width = 1000,
-#   height = 750,
-#   delay = 1 / 20,
-#   loop = TRUE,
-#   progress = TRUE
-# )
-
 av::av_encode_video(
   input = list.files("ray/", full.names = TRUE),
   output = "gifs/rayshader.mp4",
@@ -1901,4 +1896,23 @@ av::av_encode_video(
 ![](gifs/rayshader.mp4){loop="true"}
 
 Animated version with double dynamic light/shadow.
+:::
+
+## [rayshader](https://www.rayshader.com/)  {.smaller}
+
+```{r}
+#| eval: true
+#| output: asis
+#| echo: false
+f_logo("rayshader")
+```
+
+Roads and vector data overlayed on a 3D map, surface elevation and water landscape.
+
+::: {layout-nrow=1 layout-valign="center"}
+![](https://www.tylermw.com/wp-content/uploads/2021/01/nps-1.jpg)
+
+![](https://www.tylermw.com/wp-content/uploads/2020/04/map3d-1-e1588011586919.png)
+
+![](https://www.tylermw.com/wp-content/uploads/2018/07/waterbaycrop.mp4){loop="true"}
 :::
