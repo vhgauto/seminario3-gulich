@@ -18,6 +18,9 @@ anim/
 hdri/
 rasters/
 vectores/
+recortes/
+img/
+scripts/*
 
 # History files
 .Rhistory
