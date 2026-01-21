@@ -51,7 +51,7 @@ format:
     transition: none
     logo: https://ig.conae.unc.edu.ar/wp-content/uploads/sites/68/2022/04/G-CLARO-C.png
     footer: |
-      <rosa>Víctor Gauto {{< iconify svg-spinners:pulse >}} Better maps with `R`</rosa>
+      <rosa>**Víctor Gauto {{< iconify svg-spinners:pulse >}} Better maps with R**</rosa>
     slide-number: true
     progress: true
     hash-type: title
@@ -847,7 +847,7 @@ ggplot() +
 ```
 
 ::: {layout-ncol="2"}
-![](fig/tidyterra-3.png)
+![](fig/tidyterra-3.png){width=500}
 
 Included title and subtitle, grid with coordinates, points of interest and map caption.
 :::
@@ -1061,7 +1061,7 @@ ggplot() +
 ```
 
 ::: {layout-ncol="2"}
-![](fig/combined.png)
+![](fig/combined.png){width=500}
 
 Styled title, subtitle and caption, scale and compass, grid and coordinates, points of interest.
 :::
@@ -1245,7 +1245,7 @@ terra::animate(t_lh)
 ```
 
 ::: {layout-ncol="2"}
-![](fig/anim-terra-1.png)
+![](fig/anim-terra-1.png){width=500}
 
 `{terra}` prints a plot per each layer in a raster file, in sequence.
 :::
@@ -1339,7 +1339,7 @@ av::av_encode_video(
 ::: {layout-ncol="2"}
 ![](gifs/terra.mp4){loop="true"}
 
-Animated map made from single figures per layer, compiled in a `.gif` file. This technique can be applied to all mentioned methods for map plotting.
+Animated map made from single figures per layer, compiled in a `.mp4` file. This technique can be applied to all mentioned methods for map plotting.
 :::
 
 ## [tmap](https://r-tmap.github.io/tmap/index.html) {.smaller}
@@ -1412,7 +1412,7 @@ tmap_animation(
 ::: {layout-ncol="2"}
 ![](gifs/tmap.mp4){loop="true"}
 
-`{tmap}` offers a specific funtion to create animated maps from the raster layers.
+`{tmap}` offers a specific funtion to create animated maps from raster's layers.
 :::
 
 ## [gganimate](https://gganimate.com/) {.smaller}
@@ -1750,11 +1750,11 @@ av::av_encode_video(
 ```
 
 ::: {layout-nrow=1 layout-valign="center"}
-![](gifs/3d_terra10.mp4){loop="true"}
+![Light source elevation: 10°](gifs/3d_terra10.mp4){loop="true"}
 
-![](gifs/3d_terra45.mp4){loop="true"}
+![Light source elevation: 45°](gifs/3d_terra45.mp4){loop="true"}
 
-![](gifs/3d_terra80.mp4){loop="true"}
+![Light source elevation: 80°](gifs/3d_terra80.mp4){loop="true"}
 :::
 
 Animated map with dynamic light/shadow directions.
@@ -1800,6 +1800,12 @@ render_highquality(
   filename = "fig/rayshader.png",
   preview = TRUE,
   light = FALSE,
+  title_text = "Elevación Las Heras",
+  title_font = "Times",
+  title_color = "#FFFFFF",
+  title_bar_color = "#224289",
+  title_size = 60,
+  title_bar_alpha = 1,
   environment_light = "hdri/snow_field_4k.hdr",
   intensity_env = 1,
   interactive = FALSE,
@@ -1809,10 +1815,23 @@ render_highquality(
 )
 ```
 
-::: {layout-ncol="2"}
-![](fig/rayshader.png)
+::: {.columns layout-ncol=2}
 
-Elevated 3D map with a terrain color palette and ambiental lighting and natural shadows.
+::: {.column}
+![](fig/rayshader.png)
+:::
+
+::: {.column layout-nrow=2}
+Elevated 3D map with a terrain color palette and ambient lighting and natural shadows.
+
+::: {.callout-caution collapse="true"}
+## Time consuming
+
+Computationally intensive. High sampling and resolution can take several minutes.
+:::
+
+:::
+
 :::
 
 ## [rayshader](https://www.rayshader.com/) {.smaller}
@@ -1917,6 +1936,10 @@ Roads and vector data overlayed on a 3D map, surface elevation and water landsca
 
 # Resources {#sec-resources .smaller}
 
+:::: {.columns}
+
+::: {.column}
+
 [{{< iconify ion:book-sharp >}} ggplot2: Elegant Graphics for Data Analysis (3e)](https://ggplot2-book.org/maps.html)
 
 [{{< iconify ion:book-sharp >}} Making Maps with R](https://bookdown.org/nicohahn/making_maps_with_r5/docs/introduction.html)
@@ -1924,3 +1947,102 @@ Roads and vector data overlayed on a 3D map, surface elevation and water landsca
 [{{< iconify ion:book-sharp >}} R as GIS for Economists](https://tmieno2.github.io/R-as-GIS-for-Economists-Quarto/chapters/08-CreateMaps-ggplot.html)
 
 [{{< iconify ion:book-sharp >}} ggiraph-book](https://www.ardata.fr/ggiraph-book/)
+
+---
+
+[{{< iconify mdi:youtube >}} Mapping wildfires data in R with mapsf](https://www.youtube.com/watch?v=_BN7xOtbVAc)
+
+[{{< iconify mdi:youtube >}} Making maps in R using TMAP](https://www.youtube.com/watch?v=QcR9s3wF5lY)
+
+[{{< iconify mdi:youtube >}} How to FULLY Customize Leaflet Maps using R programming](https://www.youtube.com/watch?v=U0aJeaCnMeE)
+
+[{{< iconify mdi:youtube >}} 3D digital elevation maps with elevatr, rayshader and rayvista in R](https://www.youtube.com/watch?v=kGadI6_ZIR4)
+
+:::
+
+::: {.column}
+
+[{{< iconify ph:package-fill >}} elevatr, An R package for accessing elevation data](https://github.com/USEPA/elevatr)
+
+[{{< iconify ph:package-fill >}} marmap, Import, Plot and Analyze Bathymetric and Topographic Data](https://github.com/ericpante/marmap)
+
+[{{< iconify ph:package-fill >}} maptiles, Download, compose and display map tiles with R](https://github.com/riatelab/maptiles)
+
+[{{< iconify ph:package-fill >}} geodata, download geographic data](https://rspatial.github.io/geodata/)
+
+[{{< iconify ph:package-fill >}} rayvista, An R plugin for {rayshader} to view a 3D vista anywhere on earth](https://github.com/h-a-graham/rayvista)
+
+---
+
+[{{< iconify fluent-emoji-high-contrast:link >}} State of the (open source) web map](https://tim-salabim.codeberg.page/sotwm/sotwm.html)
+
+[{{< iconify fluent-emoji-high-contrast:link >}} Tutorial: Adding Open Street Map Data to Rayshader Maps in R](https://www.tylermw.com/posts/data_visualization/adding-open-street-map-data-to-rayshader-maps-in-r.html)
+
+:::
+
+::::
+
+# {.unnumbered background-color="#f79cd4"}
+
+::: {style="text-align: center;"}
+
+<gracias>Thanks for your time</gracias>
+
+:::
+
+<br>
+
+:::: {.columns layout-ncol=2}
+
+::: {.column style="text-align: center; font-size: 1em;"}
+
+` MS Víctor Gauto `
+
+:::
+
+::: {.column layout-nrow=1 style="text-align: center; font-size: 1.2em;"}
+
+[<blanco>{{< iconify ic:round-email >}}</blanco>](mailto:victor.gauto@ca.frre.utn.edu.ar)
+
+[<blanco>{{< iconify ic:baseline-home >}}</blanco>](https://vhgauto.github.io/)
+
+[<blanco>{{< iconify mdi:twitter >}}</blanco>](https://twitter.com/vhgauto)
+
+[<blanco>{{< iconify mdi:instagram >}}</blanco>](https://www.instagram.com/vhgauto/)
+
+[<blanco>{{< iconify mdi:github >}}</blanco>](https://github.com/vhgauto)
+
+[<blanco>{{< iconify ri:bluesky-fill >}}</blanco>](https://bsky.app/profile/vhgauto.bsky.social)
+
+[<blanco>{{< iconify mdi:mastodon >}}</blanco>](https://fosstodon.org/@vhgauto)
+
+:::
+
+::::
+
+<br>
+
+::: {layout-nrow=1 layout-valign="center"}
+
+![](img/Gistaq_sinfondo.png){width=150}
+
+![](img/logo_ig3.png){width=150}
+
+![](img/iidthh.png){width=150}
+
+![](img/Conicet_Logo_con_letras.png){width=150}
+
+:::
+
+::: {layout-nrow=1 layout-valign="center"}
+
+![](img/logo_utn6.png){width=150}
+
+![](img/unne.png){width=150}
+
+![](img/06 UNNE Justificado Color.png){width=150}
+
+![](img/CONAE.png){width=150}
+
+:::
+
