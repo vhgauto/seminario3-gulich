@@ -62,14 +62,10 @@ format:
     link-external-newwindow: true
     output-location: column
     theme:
-      # - flatly
       - extras/mi_estilo.scss
     include-in-header:
       - text: |
           <link rel='shortcut icon' href='img/favicon.jpg'/>
-    #   - extras/hide-logo.html
-    # include-after-body:
-    #   - extras/hide-menu.html
     # pointer:
     #   pointerSize: 15
     #   color: "#E81F76"
@@ -86,14 +82,16 @@ editor_options:
 # - pointer
 ---
 
-# Outline {.center}
+# Outline {.center .unnumbered}
 
-- Introduction 
-- Motivation
-- Tools
-- Conclusion
-- Future improvements
-- Resources
+- Introduction [$\S$ @sec-introduction]
+- Motivation [$\S$ @sec-motivation]
+- Static maps [$\S$ @sec-static]
+- Real color maps [$\S$ @sec-real-color]
+- Animated maps [$\S$ @sec-animated]
+- Interactive maps [$\S$ @sec-interactive]
+- 3D maps [$\S$ @sec-3d]
+- Resources [$\S$ @sec-resources]
 
 <center>Slides available online</center>
 
@@ -113,7 +111,7 @@ A good map is an [appealing]{.fragment .hl-blanco fragment-index=1} and [useful]
 
 ![](img/Minard.png){width="80%" fig-align="center"}
 
-# Motivation {.center}
+# Motivation {#sec-motivation .center}
 
 - Alternative to GUI.
 
@@ -866,7 +864,7 @@ f_logo("tidyterra")
 Contour lines, categorical legend with base map tiles.
 
 ::: {layout-nrow=1 layout-valign="center"}
-![](https://dieghernan.github.io/tidyterra/articles/contourlines-1.png)
+![](https://dieghernan.github.io/tidyterra/reference/geom_spat_contour-5.png)
 
 ![](https://dieghernan.github.io/tidyterra/articles/faqs_files/figure-html/overlay_alt-2.png)
 
@@ -1068,7 +1066,7 @@ ggplot() +
 Styled title, subtitle and caption, scale and compass, grid and coordinates, points of interest.
 :::
 
-# Real color maps {.center}
+# Real color maps {#sec-real-color .center}
 
 RGB composition maps to ilustrate Earth surface, useful for context with an easy approach to the real area of interest.
 
@@ -1211,7 +1209,7 @@ ggplot() +
 RGB composition map with points of interest, north arrow, scale and title.
 :::
 
-# Animated maps {.center}
+# Animated maps {#sec-animated .center}
 
 Used to indicate change, evolution in time and progress. The file formats can be images (`.gif`) or video (`.mp4`).
 
@@ -1530,7 +1528,7 @@ anim_save(
 Animated map created by combining `{tidyterra}` with `{gganimate}`, including functions to indicate the layer change in the subtitle.
 :::
 
-# Interactive maps {.center}
+# Interactive maps {#sec-interactive .center}
 
 Maps were the user can play, zoom in/out, click and hover with the mouse. Usually found in web sites and mobile apps as `.html`.
 
@@ -1627,7 +1625,7 @@ mapboxgl(
   add_reset_control(position = "bottom-right")
 ```
 
-# 3D maps {.center}
+# 3D maps {#sec-3d .center}
 
 Visually atractive maps that show elevation related to a continuous variable, usually the terrain.
 
@@ -1916,3 +1914,13 @@ Roads and vector data overlayed on a 3D map, surface elevation and water landsca
 
 ![](https://www.tylermw.com/wp-content/uploads/2018/07/waterbaycrop.mp4){loop="true"}
 :::
+
+# Resources {#sec-resources .smaller}
+
+[{{< iconify ion:book-sharp >}} ggplot2: Elegant Graphics for Data Analysis (3e)](https://ggplot2-book.org/maps.html)
+
+[{{< iconify ion:book-sharp >}} Making Maps with R](https://bookdown.org/nicohahn/making_maps_with_r5/docs/introduction.html)
+
+[{{< iconify ion:book-sharp >}} R as GIS for Economists](https://tmieno2.github.io/R-as-GIS-for-Economists-Quarto/chapters/08-CreateMaps-ggplot.html)
+
+[{{< iconify ion:book-sharp >}} ggiraph-book](https://www.ardata.fr/ggiraph-book/)
