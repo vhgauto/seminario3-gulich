@@ -1958,6 +1958,12 @@ Roads and vector data overlayed on a 3D map, surface elevation and water landsca
 
 [{{< iconify mdi:youtube >}} 3D digital elevation maps with elevatr, rayshader and rayvista in R](https://www.youtube.com/watch?v=kGadI6_ZIR4)
 
+::: {.callout style='font-size: 2em;'}
+Presentation made with {{< quarto >}} & {{< iconify fa7-brands:r-project style="color:#74aadb;" >}}
+
+[Code available at {{< iconify mdi:github >}}](https://github.com/vhgauto/seminario3-gulich)
+:::
+
 :::
 
 ::: {.column}
