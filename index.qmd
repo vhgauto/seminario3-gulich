@@ -152,7 +152,7 @@ Las Heras city and Aconcagua mountain locations.
 source("scripts/.soporte.R")
 ```
 
-## [terra](https://rspatial.github.io/terra/) {.smaller}
+## [terra](https://rspatial.github.io/terra/)
 
 <!-- https://github.com/rspatial/terra/issues/1774 -->
 
@@ -176,7 +176,7 @@ plot(r)
 Basic map made with `{terra}`, for a quick visualization.
 :::
 
-## [terra](https://rspatial.github.io/terra/) {.smaller}
+## [terra](https://rspatial.github.io/terra/)
 
 ```{r}
 #| eval: true
@@ -204,7 +204,7 @@ plot(
 Change legend location and color palette and add map title.
 :::
 
-## [terra](https://rspatial.github.io/terra/) {.smaller}
+## [terra](https://rspatial.github.io/terra/)
 
 ```{r}
 #| eval: true
@@ -297,12 +297,12 @@ inset(
 ```
 
 ::: {layout-ncol="2"}
-![](fig/terra-3.png)
+![](fig/terra-3.png){width=500}
 
 Inset map with Mendoza Province, points of interests with labels, grid lines, axes coordinates, north compass and styled title and subtitle.
 :::
 
-## [mapsf](https://riatelab.github.io/mapsf/) {.smaller}
+## [mapsf](https://riatelab.github.io/mapsf/)
 
 ```{r}
 #| eval: true
@@ -322,7 +322,7 @@ mf_raster(r)
 Basic map made with `{mapsf}`.
 :::
 
-## [mapsf](https://riatelab.github.io/mapsf/) {.smaller}
+## [mapsf](https://riatelab.github.io/mapsf/)
 
 ```{r}
 #| eval: true
@@ -352,7 +352,7 @@ mf_graticule(r, pos = c("bottom", "left"))
 North arrow is included along with grid, coordinates, legend at top and title.
 :::
 
-## [mapsf](https://riatelab.github.io/mapsf/) {.smaller}
+## [mapsf](https://riatelab.github.io/mapsf/)
 
 ```{r}
 #| eval: true
@@ -458,7 +458,7 @@ mf_inset_off()
 Final map including Mendoza Province inset in top-left corner, compass, sites of interest and its labels, legend in the bottom-left, grid with coordinates, credits and title.
 :::
 
-## [mapsf](https://riatelab.github.io/mapsf/) {.smaller}
+## [mapsf](https://riatelab.github.io/mapsf/)
 
 ```{r}
 #| eval: true
@@ -469,7 +469,7 @@ f_logo("mapsf")
 
 [![](img/mapsf.jpeg){width="70%"}](https://raw.githubusercontent.com/riatelab/mapsf/master/vignettes/fig/mapsf_cheatsheet.pdf)
 
-## [mapsf](https://riatelab.github.io/mapsf/) {.smaller}
+## [mapsf](https://riatelab.github.io/mapsf/)
 
 ```{r}
 #| eval: true
@@ -478,7 +478,7 @@ f_logo("mapsf")
 f_logo("mapsf")
 ```
 
-Size and color mapped to variables, in continuous and discrete legends, with globe context location as inset.
+Size and color mapped to variables, in continuous and discrete legends,<br>with globe context location as inset.
 
 ::: {layout-nrow=1}
 ![](https://riatelab.github.io/mapsf/articles/mapsf_files/figure-html/mf_map_pc-1.png)
@@ -490,7 +490,7 @@ Size and color mapped to variables, in continuous and discrete legends, with glo
 ![](https://riatelab.github.io/mapsf/articles/fig/wo_inset_worldmap-1.png)
 :::
 
-## [tmap](https://r-tmap.github.io/tmap/index.html) {.smaller}
+## [tmap](https://r-tmap.github.io/tmap/index.html)
 
 ```{r}
 #| eval: true
@@ -511,7 +511,7 @@ tm_shape(r) +
 Basic map with binned legend.
 :::
 
-## [tmap](https://r-tmap.github.io/tmap/index.html) {.smaller}
+## [tmap](https://r-tmap.github.io/tmap/index.html)
 
 ```{r}
 #| eval: true
@@ -537,7 +537,7 @@ tm_shape(r) +
 Change in the legend location, added grid and compass in the bottom-right corner.
 :::
 
-## [tmap](https://r-tmap.github.io/tmap/index.html) {.smaller}
+## [tmap](https://r-tmap.github.io/tmap/index.html)
 
 ```{r}
 #| eval: true
@@ -641,7 +641,7 @@ tm_shape(r) +
 Inset map, scale, points of interest, credits, title, grid and axes coordinates.
 :::
 
-## [tmap](https://r-tmap.github.io/tmap/index.html) {.smaller}
+## [tmap](https://r-tmap.github.io/tmap/index.html)
 
 ```{r}
 #| eval: true
@@ -660,7 +660,7 @@ Point size, color and fill mapped to variables, categorical faceted maps.
 ![](https://r-tmap.github.io/tmap/articles/examples_gridmaps_files/figure-html/unnamed-chunk-5-1.png)
 :::
 
-## [tmap](https://r-tmap.github.io/tmap/index.html) {.smaller}
+## [tmap](https://r-tmap.github.io/tmap/index.html)
 
 ::: {layout-ncol="4"}
 
@@ -686,7 +686,7 @@ Point size, color and fill mapped to variables, categorical faceted maps.
 
 :::
 
-## [tidyterra](https://dieghernan.github.io/tidyterra/) {.smaller}
+## [tidyterra](https://dieghernan.github.io/tidyterra/)
 
 ```{r}
 #| eval: true
@@ -709,7 +709,7 @@ ggplot() +
 Basic plot with blue color palette legend.
 :::
 
-## [tidyterra](https://dieghernan.github.io/tidyterra/) {.smaller}
+## [tidyterra](https://dieghernan.github.io/tidyterra/)
 
 ```{r}
 #| eval: true
@@ -733,7 +733,7 @@ ggplot() +
 Terrain color palette and removed panel background.
 :::
 
-## [tidyterra](https://dieghernan.github.io/tidyterra/) {.smaller}
+## [tidyterra](https://dieghernan.github.io/tidyterra/)
 
 ```{r}
 #| eval: true
@@ -852,7 +852,7 @@ ggplot() +
 Included title and subtitle, grid with coordinates, points of interest and map caption.
 :::
 
-## [tidyterra](https://dieghernan.github.io/tidyterra/) {.smaller}
+## [tidyterra](https://dieghernan.github.io/tidyterra/)
 
 ```{r}
 #| eval: true
@@ -871,7 +871,7 @@ Contour lines, categorical legend with base map tiles.
 ![](https://dieghernan.github.io/tidyterra/reference/geom_spatraster_rgb-2.png)
 :::
 
-## Combined version {.smaller}
+## Combined version
 
 ```{r}
 library(ggspatial)
@@ -1089,7 +1089,7 @@ Las Heras city and Aconcagua mountain locations.
 
 [^2]: ESRI World Imagery | Tiles © Esri - Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community.
 
-## [terra](https://rspatial.github.io/terra/) {.smaller}
+## [terra](https://rspatial.github.io/terra/)
 
 <!-- f_png("rgb_terra", alto = 5.7) -->
 
@@ -1138,7 +1138,7 @@ points(lh, pch = 21, cex = 2, col = "black", bg = "gold")
 RGB composition map with labeled points of interest, north arrow and title.
 :::
 
-## [tidyterra](https://dieghernan.github.io/tidyterra/) {.smaller}
+## [tidyterra](https://dieghernan.github.io/tidyterra/)
 
 ```{r}
 #| eval: true
@@ -1230,7 +1230,7 @@ Monthly mean temperature[^3], from 1970 to 2000, Las Heras Department, Mendoza P
 
 [^3]: Fick, S.E. and R.J. Hijmans, 2017. WorldClim 2: new 1km spatial resolution climate surfaces for global land areas. [International Journal of Climatology 37 (12): 4302-4315](https://rmets.onlinelibrary.wiley.com/doi/abs/10.1002/joc.5086).
 
-## [terra](https://rspatial.github.io/terra/) {.smaller}
+## [terra](https://rspatial.github.io/terra/)
 
 ```{r}
 #| eval: true
@@ -1250,7 +1250,7 @@ terra::animate(t_lh)
 `{terra}` prints a plot per each layer in a raster file, in sequence.
 :::
 
-## [terra](https://rspatial.github.io/terra/) {.smaller}
+## [terra](https://rspatial.github.io/terra/)
 
 ```{r}
 #| eval: true
@@ -1342,7 +1342,7 @@ av::av_encode_video(
 Animated map made from single figures per layer, compiled in a `.mp4` file. This technique can be applied to all mentioned methods for map plotting.
 :::
 
-## [tmap](https://r-tmap.github.io/tmap/index.html) {.smaller}
+## [tmap](https://r-tmap.github.io/tmap/index.html)
 
 ```{r}
 #| eval: true
@@ -1415,7 +1415,7 @@ tmap_animation(
 `{tmap}` offers a specific funtion to create animated maps from raster's layers.
 :::
 
-## [gganimate](https://gganimate.com/) {.smaller}
+## [gganimate](https://gganimate.com/)
 
 ```{r}
 #| eval: true
@@ -1643,7 +1643,7 @@ Elevation[^1] from <b>Las Heras</b> department in Mendoza province to demostrate
 
 [^1]: NOAA National Centers for Environmental Information. (2022). ETOPO 2022 15 arc-second global relief model. NOAA National Centers for Environmental Information. <http://doi.org/10.25921/fd45-gt74>
 
-## [terra](https://rspatial.github.io/terra/) {.smaller}
+## [terra](https://rspatial.github.io/terra/)
 
 ```{r}
 #| eval: true
@@ -1674,7 +1674,7 @@ plot(
 Shaded map with elevation.
 :::
 
-## [terra](https://rspatial.github.io/terra/) {.smaller}
+## [terra](https://rspatial.github.io/terra/)
 
 ```{r}
 #| eval: true
@@ -1759,7 +1759,7 @@ av::av_encode_video(
 
 Animated map with dynamic light/shadow directions.
 
-## [rayshader](https://www.rayshader.com/)  {.smaller}
+## [rayshader](https://www.rayshader.com/) 
 
 ```{r}
 #| eval: true
@@ -1834,7 +1834,7 @@ Computationally intensive. High sampling and resolution can take several minutes
 
 :::
 
-## [rayshader](https://www.rayshader.com/) {.smaller}
+## [rayshader](https://www.rayshader.com/)
 
 ```{r}
 #| eval: true
@@ -1915,7 +1915,7 @@ av::av_encode_video(
 Animated version with double dynamic light/shadow.
 :::
 
-## [rayshader](https://www.rayshader.com/)  {.smaller}
+## [rayshader](https://www.rayshader.com/) 
 
 ```{r}
 #| eval: true
