@@ -1561,7 +1561,7 @@ Argentina map[^4] with provinces division and names.
 
 ![](https://r-tmap.github.io/tmap.mapgl/logo.png)
 
-![](https://walker-data.com/mapgl/logo.png)
+![](https://raw.githubusercontent.com/tim-salabim/mvl/refs/heads/master/cartodb_positron/logo_light.png)
 
 :::
 
@@ -1575,7 +1575,7 @@ Argentina map[^4] with provinces division and names.
 
 [tmap.mapgl](https://r-tmap.github.io/tmap/index.html)
 
-[mapgl](https://walker-data.com/mapgl/)
+[mapview](https://r-spatial.github.io/mapview/)
 
 :::
 
@@ -1962,6 +1962,8 @@ Roads and vector data overlayed on a 3D map, surface elevation and water landsca
 
 ::: {.column}
 
+[{{< iconify ph:package-fill >}} mapgl, R interface to Mapbox GL JS v3 and Maplibre GL JS](https://walker-data.com/mapgl/)
+
 [{{< iconify ph:package-fill >}} elevatr, An R package for accessing elevation data](https://github.com/USEPA/elevatr)
 
 [{{< iconify ph:package-fill >}} marmap, Import, Plot and Analyze Bathymetric and Topographic Data](https://github.com/ericpante/marmap)
@@ -1973,6 +1975,10 @@ Roads and vector data overlayed on a 3D map, surface elevation and water landsca
 [{{< iconify ph:package-fill >}} rayvista, An R plugin for {rayshader} to view a 3D vista anywhere on earth](https://github.com/h-a-graham/rayvista)
 
 ---
+
+[{{< iconify fluent-emoji-high-contrast:link >}} MapLibre GL JS](https://maplibre.org/maplibre-gl-js/docs/)
+
+[{{< iconify fluent-emoji-high-contrast:link >}} Mapbox GL JS](https://www.mapbox.com/)
 
 [{{< iconify fluent-emoji-high-contrast:link >}} State of the (open source) web map](https://tim-salabim.codeberg.page/sotwm/sotwm.html)
 
