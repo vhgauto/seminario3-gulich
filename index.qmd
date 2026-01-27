@@ -1,6 +1,6 @@
 ---
-title: Better maps with <quarto-portada>R</quarto-portada>
-subtitle: <u>With examples</u>
+title: Better maps with <quarto-portada>coding</quarto-portada>
+subtitle: <em>With <quarto-portada>R</quarto-portada> examples</em>
 title-slide-attributes:
   data-background-color: "#224289"
 author:
@@ -77,7 +77,6 @@ execute:
   warning: false
 editor_options:
   chunk_output_type: console
-# preload-iframes: true
 # revealjs-plugins:
 # - pointer
 ---
@@ -109,19 +108,21 @@ https://vhgauto.github.io/seminario3-gulich/
 
 A good map is an [appealing]{.fragment .hl-blanco fragment-index=1} and [useful]{.fragment .hl-blanco fragment-index=1} plot, that combines <u>design</u>, <u>geography</u> and <u>GIS</u>.
 
-![](img/Minard.png){width="80%" fig-align="center"}
+![](img/Minard.png){width=500 fig-align="center"}
 
 # Motivation {#sec-motivation .center}
 
-- Alternative to GUI.
+Why coding?
 
-- Creating maps with coding makes reproducibility more accessible.
+- [Alternative]{.fragment .hl-blanco} to GUI.
 
-- Easy to get support and test solutions.
+- Creating maps with coding makes [reproducibility]{.fragment .hl-blanco} more accessible.
 
-- Facilitate update maps with new data.
+- Easy to get [support]{.fragment .hl-blanco} and test solutions.
 
-- Change styles by variable definitions.
+- Facilitate [update]{.fragment .hl-blanco} maps with new data.
+
+- Change styles by [variable]{.fragment .hl-blanco} definitions.
 
 # Static maps {#sec-static .center}
 
@@ -1933,6 +1934,16 @@ Roads and vector data overlayed on a 3D map, surface elevation and water landsca
 
 ![](https://www.tylermw.com/wp-content/uploads/2018/07/waterbaycrop.mp4){loop="true"}
 :::
+
+# Conclusion {#sec-conclusion .center}
+
+- Coding can be <tachado>scary</tachado> challenging sometimes, but the results are [remarkable]{.fragment .hl-blanco}.
+
+- The different maps formats that can be created (static, animated, interactive, 3D) [worth a try]{.fragment .hl-blanco}.
+
+- [Reproducibility]{.fragment .hl-blanco} is important in data analysis but is equaly important in maps plotting.
+
+- This seminar it's a glimpse of mapping with code, and a [starting point]{.fragment .hl-blanco} using recycling the scripts available.
 
 # Resources {#sec-resources .smaller}
 
