@@ -54,6 +54,10 @@ $callout-border-width: 1rem;
 
 // ESTILOS PROPIOS -------------------------------------------------------------
 
+tachado {
+    text-decoration: line-through $rosa 3px;
+}
+
 .fin {
     font-family: "Fleur De Leah";
     color: $gris2;
