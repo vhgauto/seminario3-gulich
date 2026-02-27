@@ -77,6 +77,8 @@ execute:
   warning: false
 editor_options:
   chunk_output_type: console
+filters: 
+  - roughnotation
 # revealjs-plugins:
 # - pointer
 ---
@@ -106,7 +108,7 @@ https://vhgauto.github.io/seminario3-gulich/
 
 # Introduction {#sec-introduction .center}
 
-A good map is an [appealing]{.fragment .hl-blanco fragment-index=1} and [useful]{.fragment .hl-blanco fragment-index=1} plot, that combines <u>design</u>, <u>geography</u> and <u>GIS</u>.
+A good map is an [appealing]{.rn-fragment rn-type=box rn-color=#F79CD4 rn-strokeWidth=3 rn-index=1} and [useful]{.rn-fragment rn-type=box rn-color=#F79CD4 rn-strokeWidth=3 rn-index=1} plot, that combines <u>design</u>, <u>geography</u> and <u>GIS</u>.
 
 ![](img/Minard.png){width=500 fig-align="center"}
 
@@ -114,15 +116,15 @@ A good map is an [appealing]{.fragment .hl-blanco fragment-index=1} and [useful]
 
 Why coding?
 
-- [Alternative]{.fragment .hl-blanco} to GUI.
+- [Alternative]{.rn-fragment rn-type=box rn-color=#F79CD4 rn-strokeWidth=3} to GUI.
 
-- Creating maps with coding makes [reproducibility]{.fragment .hl-blanco} more accessible.
+- Creating maps with coding makes [reproducibility]{.rn-fragment rn-type=box rn-color=#F79CD4 rn-strokeWidth=3} more accessible.
 
-- Easy to get [support]{.fragment .hl-blanco} and test solutions.
+- Easy to get [support]{.rn-fragment rn-type=box rn-color=#F79CD4 rn-strokeWidth=3} and test solutions.
 
-- Facilitate [update]{.fragment .hl-blanco} maps with new data.
+- Facilitate [update]{.rn-fragment rn-type=box rn-color=#F79CD4 rn-strokeWidth=3} maps with new data.
 
-- Change styles by [variable]{.fragment .hl-blanco} definitions.
+- Change styles by [variable]{.rn-fragment rn-type=box rn-color=#F79CD4 rn-strokeWidth=3} definitions.
 
 # Static maps {#sec-static .center}
 
@@ -1937,13 +1939,13 @@ Roads and vector data overlayed on a 3D map, surface elevation and water landsca
 
 # Conclusion {#sec-conclusion .center}
 
-- Coding can be <tachado>scary</tachado> challenging sometimes, but the results are [remarkable]{.fragment .hl-blanco}.
+- Coding can be [scary]{.rn-fragment rn-type=crossed-off rn-color=#F79CD4 rn-strokeWidth=3} challenging sometimes, but the results are [remarkable]{.rn-fragment rn-type=box rn-color=#F79CD4 rn-strokeWidth=3}.
 
-- The different maps formats that can be created (static, animated, interactive, 3D) [worth a try]{.fragment .hl-blanco}.
+- The different maps formats that can be created (static, animated, interactive, 3D) [worth a try]{.rn-fragment rn-type=box rn-color=#F79CD4 rn-strokeWidth=3}.
 
-- [Reproducibility]{.fragment .hl-blanco} is important in data analysis but is equaly important in maps plotting.
+- [Reproducibility]{.rn-fragment rn-type=box rn-color=#F79CD4 rn-strokeWidth=3} is important in data analysis but is equaly important in maps plotting.
 
-- This seminar it's a glimpse of mapping with code, and a [starting point]{.fragment .hl-blanco} using recycling the scripts available.
+- This seminar it's a glimpse of mapping with code, and a [starting point]{.rn-fragment rn-type=box rn-color=#F79CD4 rn-strokeWidth=3} using recycling the scripts available.
 
 # Resources {#sec-resources .smaller}
 
