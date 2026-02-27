@@ -866,12 +866,18 @@ f_logo("tidyterra")
 
 Contour lines, categorical legend with base map tiles.
 
-::: {layout-nrow=1 layout-valign="center"}
-![](https://dieghernan.github.io/tidyterra/reference/geom_spat_contour-5.png)
+::: {.columns}
 
-![](https://dieghernan.github.io/tidyterra/articles/faqs_files/figure-html/overlay_alt-2.png)
+::: {.column width="65%"}
+![](https://dieghernan.github.io/tidyterra/reference/geom_spat_contour-2.png)
+:::
 
-![](https://dieghernan.github.io/tidyterra/reference/geom_spatraster_rgb-2.png)
+::: {.column layout-nrow="2" width="35%"}
+![](https://dieghernan.github.io/tidyterra/reference/scale_coltab-3.png)
+
+![](https://raw.githubusercontent.com/dieghernan/tidyterra/main/img/README-example-tile-2.png)
+:::
+
 :::
 
 ## Combined version
