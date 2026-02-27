@@ -50,6 +50,14 @@ $presentation-heading-color: $rosa !default;
 
 $callout-border-width: 1rem;
 
+.reveal div.callout.callout-caution.callout-style-default .callout-title {
+    background-color: $azul !important;
+}
+
+.reveal div.callout.callout-note.callout-style-default .callout-title {
+    background-color: $azul !important;
+}
+
 /*-- scss:rules --*/
 
 // ESTILOS PROPIOS -------------------------------------------------------------
