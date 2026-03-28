@@ -75,6 +75,7 @@ execute:
   echo: true
   eval: false
   warning: false
+lightbox: true
 editor_options:
   chunk_output_type: console
 filters: 
@@ -110,7 +111,7 @@ https://vhgauto.github.io/seminario3-gulich/
 
 A good map is an [appealing]{.rn-fragment rn-type=box rn-color=#F79CD4 rn-strokeWidth=3 rn-index=1} and [useful]{.rn-fragment rn-type=box rn-color=#F79CD4 rn-strokeWidth=3 rn-index=1} plot, that combines <u>design</u>, <u>geography</u> and <u>GIS</u>.
 
-![](img/Minard.png){width=500 fig-align="center"}
+![](img/Minard.png){width=700px fig-align="center"}
 
 # Motivation {#sec-motivation .center}
 
@@ -118,7 +119,7 @@ A typical workflow.
 
 ![](fig/wf.png){fig-align="center"}
 
-## Why coding?
+## Why coding? {.center}
 
 - [Alternative]{.rn-fragment rn-type=box rn-color=#F79CD4 rn-strokeWidth=3} to GUI.
 
@@ -1352,7 +1353,7 @@ av::av_encode_video(
 ```
 
 ::: {layout-ncol="2"}
-![](gifs/terra.mp4){loop="true"}
+![](gifs/terra.mp4){.nolightbox loop="true"}
 
 Animated map made from single figures per layer, compiled in a `.mp4` file. This technique can be applied to all mentioned methods for map plotting.
 :::
@@ -1425,7 +1426,7 @@ tmap_animation(
 ```
 
 ::: {layout-ncol="2"}
-![](gifs/tmap.mp4){loop="true"}
+![](gifs/tmap.mp4){.nolightbox loop="true"}
 
 `{tmap}` offers a specific funtion to create animated maps from raster's layers.
 :::
@@ -1538,7 +1539,7 @@ anim_save(
 ```
 
 ::: {layout-ncol="2"}
-![](gifs/gganimate.mp4){loop="true"}
+![](gifs/gganimate.mp4){.nolightbox loop="true"}
 
 Animated map created by combining `{tidyterra}` with `{gganimate}`, including functions to indicate the layer change in the subtitle.
 :::
@@ -1765,11 +1766,11 @@ av::av_encode_video(
 ```
 
 ::: {layout-nrow=1 layout-valign="center"}
-![Light source elevation: 10°](gifs/3d_terra10.mp4){loop="true"}
+![Light source elevation: 10°](gifs/3d_terra10.mp4){.nolightbox loop="true"}
 
-![Light source elevation: 45°](gifs/3d_terra45.mp4){loop="true"}
+![Light source elevation: 45°](gifs/3d_terra45.mp4){.nolightbox loop="true"}
 
-![Light source elevation: 80°](gifs/3d_terra80.mp4){loop="true"}
+![Light source elevation: 80°](gifs/3d_terra80.mp4){.nolightbox loop="true"}
 :::
 
 Animated map with dynamic light/shadow directions.
@@ -1925,7 +1926,7 @@ av::av_encode_video(
 ```
 
 ::: {layout-ncol="2"}
-![](gifs/rayshader.mp4){loop="true"}
+![](gifs/rayshader.mp4){.nolightbox loop="true"}
 
 Animated version with double dynamic light/shadow.
 :::
@@ -1946,18 +1947,18 @@ Roads and vector data overlayed on a 3D map, surface elevation and water landsca
 
 ![](https://www.tylermw.com/wp-content/uploads/2020/04/map3d-1-e1588011586919.png)
 
-![](https://www.tylermw.com/wp-content/uploads/2018/07/waterbaycrop.mp4){loop="true"}
+![](https://www.tylermw.com/wp-content/uploads/2018/07/waterbaycrop.mp4){.nolightbox loop="true"}
 :::
 
 # Conclusion {#sec-conclusion .center}
 
-- Coding can be [scary]{.rn-fragment rn-type=crossed-off rn-color=#F79CD4 rn-strokeWidth=3} challenging sometimes, but the results are [remarkable]{.rn-fragment rn-type=box rn-color=#F79CD4 rn-strokeWidth=3}.
+- Coding can be [scary]{.rn-fragment rn-type=crossed-off rn-color=#F79CD4 rn-strokeWidth=3} [challenging]{.rn-fragment rn-type=box rn-color=#F79CD4 rn-strokeWidth=3} sometimes, but the results are remarkable.
 
 - The different maps formats that can be created (static, animated, interactive, 3D) [worth a try]{.rn-fragment rn-type=box rn-color=#F79CD4 rn-strokeWidth=3}.
 
 - [Reproducibility]{.rn-fragment rn-type=box rn-color=#F79CD4 rn-strokeWidth=3} is important in data analysis but is equaly important in maps plotting.
 
-- This seminar it's a glimpse of mapping with code, and a [starting point]{.rn-fragment rn-type=box rn-color=#F79CD4 rn-strokeWidth=3} using recycling the scripts available.
+- This seminar it's a glimpse of mapping with code using <rosa>R</rosa>, and a [starting point]{.rn-fragment rn-type=box rn-color=#F79CD4 rn-strokeWidth=3} to start using the scripts available.
 
 # Resources {#sec-resources .smaller}
 
@@ -2033,13 +2034,11 @@ Presentation made with {{< quarto >}} & {{< iconify fa7-brands:r-project style="
 
 ::: {.column style="text-align: center; font-size: 1em;"}
 
-` MS Víctor Gauto `
+**MS Víctor Gauto**<br>[`victor.gauto@ca.frre.utn.edu.ar`](mailto:victor.gauto@ca.frre.utn.edu.ar)
 
 :::
 
 ::: {.column layout-nrow=1 style="text-align: center; font-size: 1.2em;"}
-
-[<blanco>{{< iconify ic:round-email >}}</blanco>](mailto:victor.gauto@ca.frre.utn.edu.ar)
 
 [<blanco>{{< iconify ic:baseline-home >}}</blanco>](https://vhgauto.github.io/)
 
@@ -2053,33 +2052,42 @@ Presentation made with {{< quarto >}} & {{< iconify fa7-brands:r-project style="
 
 [<blanco>{{< iconify mdi:mastodon >}}</blanco>](https://fosstodon.org/@vhgauto)
 
+`@vhgauto`
+
 :::
 
 ::::
 
-<br>
-
 ::: {layout-nrow=1 layout-valign="center"}
 
-![](img/Gistaq_sinfondo.png){width=150}
+<center>
 
-![](img/logo_ig3.png){width=150}
+![](img/Gistaq_sinfondo.png){width=165}
 
-![](img/iidthh.png){width=150}
+![](img/logo_ig3.png){width=165}
 
-![](img/Conicet_Logo_con_letras.png){width=150}
+![](img/iidthh.png){width=165}
+
+![](img/Conicet_Logo_con_letras.png){width=165}
+
+</center>
 
 :::
 
 ::: {layout-nrow=1 layout-valign="center"}
 
-![](img/logo_utn6.png){width=150}
+<center>
 
-![](img/unne.png){width=150}
+![](img/logo_utn6.png){width=165}
 
-![](img/06 UNNE Justificado Color.png){width=150}
+![](img/unne.png){width=165}
 
-![](img/CONAE.png){width=150}
+![](img/UNC_03_NEGRO.svg){width=165}
+
+![](img/CONAE.png){width=165}
+
+</center>
 
 :::
 
+<center><span style='font-size: 7pt;'>*No generative AI was used to make this presentation*</span></center>
