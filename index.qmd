@@ -55,7 +55,7 @@ format:
     slide-number: true
     progress: true
     hash-type: title
-    date: 2026-01-01
+    date: 2026-04-01
     center-title-slide: false
     navigation-mode: linear
     link-external-icon: false
@@ -103,7 +103,7 @@ filters:
 https://vhgauto.github.io/seminario3-gulich/
 ```
 
-![](img/qr_seminario.svg){.absolute top=50 right=180 width="400" height="400"}
+![](img/qr_seminario.png){.nolightbox .absolute top=50 right=180 width="400" height="400"}
 
 :::
 
