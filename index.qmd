@@ -86,6 +86,10 @@ filters:
 
 # Outline {.center .unnumbered}
 
+:::: {.columns}
+
+::: {.column  width="40%"}
+
 - Introduction [$\S$ @sec-introduction]
 - Motivation [$\S$ @sec-motivation]
 - Static maps [$\S$ @sec-static]
@@ -94,6 +98,11 @@ filters:
 - Interactive maps [$\S$ @sec-interactive]
 - 3D maps [$\S$ @sec-3d]
 - Resources [$\S$ @sec-resources]
+- Conclusion [$\S$ @sec-conclusion]
+
+:::
+
+::: {.column  width="60%"}
 
 <center>Slides available online</center>
 
@@ -103,9 +112,13 @@ filters:
 https://vhgauto.github.io/seminario3-gulich/
 ```
 
-![](img/qr_seminario.png){.nolightbox .absolute top=50 right=180 width="400" height="400"}
+![](img/qr_seminario.png){width="70%" fig-align="center"}
 
 :::
+
+:::
+
+::::
 
 # Introduction {#sec-introduction .center}
 
@@ -1223,6 +1236,107 @@ ggplot() +
 ![](fig/rgb_tidyterra.png)
 
 RGB composition map with points of interest, north arrow, scale and title.
+:::
+
+## [tmap](https://r-tmap.github.io/)
+
+<!-- f_png("rgb_tmap", alto = 5.7) -->
+
+```{r}
+#| eval: true
+#| output: asis
+#| echo: false
+f_logo("tmap")
+```
+
+```{r}
+tm_shape(mt) +
+  tm_rgb(
+    col.scale = tm_scale_rgb(probs = c(0, .99), stretch = TRUE)
+  ) +
+  tm_shape(lh_v) +
+  tm_polygons(
+    fill = NULL,
+    col = "black",
+    lty = "solid",
+    lwd = 3
+  ) +
+  tm_polygons(
+    fill = NULL,
+    col = "gold",
+    lty = "dashed",
+    lwd = 2
+  ) +
+  tm_shape(p) +
+  tm_symbols(
+    size = .5,
+    fill = "gold",
+    col = "black"
+  ) +
+  tm_title("Las Heras, Mendoza") +
+  tm_compass() +
+  tm_scalebar(
+    position = c("left", "bottom"),
+    bg = TRUE,
+    bg.color = "white"
+  )
+```
+
+::: {layout-ncol="2"}
+![](fig/rgb_tmap.png)
+
+RGB composition map with points of interest, north arrow, title and scale bar in the left bottom corner.
+:::
+
+## [mapsf](https://riatelab.github.io/mapsf/)
+
+<!-- f_png("rgb_mapsf", alto = 5.7) -->
+
+```{r}
+#| eval: true
+#| output: asis
+#| echo: false
+f_logo("mapsf")
+```
+
+```{r}
+mf_raster(mt)
+mf_map(
+  sf::st_as_sf(as.lines(lh_v)),
+  col = "gold",
+  lty = "solid",
+  lwd = 2,
+  add = TRUE
+)
+mf_map(
+  sf::st_as_sf(as.lines(lh_v)),
+  col = "black",
+  lty = "dashed",
+  lwd = 2,
+  add = TRUE
+)
+mf_map(
+  sf::st_as_sf(p),
+  col = "gold",
+  border = "black",
+  cex = 1.5,
+  pch = 21,
+  add = TRUE
+)
+mf_title("Las Heras, Mendoza")
+mf_arrow(pos = "topleft", col = "gold", adj = c(2, 0))
+mf_credits(
+  "Víctor Gauto | @vhgauto",
+  pos = "bottomright",
+  col = "black",
+  bg = "white"
+)
+```
+
+::: {layout-ncol="2"}
+![](fig/rgb_mapsf.png)
+
+RGB composition map with points of interest, north arrow and title.
 :::
 
 # Animated maps {#sec-animated .center}
